@@ -50,10 +50,25 @@ def main():
 
     # 3. Company detail for each symbol (fill symbols after you see the shape above)
     #    Symbols look like "JKH.N0000".
-    symbols = []  # e.g. ["JKH.N0000", "COMB.N0000"]
+    symbols = ["JKH.N0000"]  # start with one; add the rest once the shape is clear
     for s in symbols:
         save(f"company_{s}", post("companyInfoSummery", {"symbol": s}))
         time.sleep(1)  # be polite to their server
+
+    # 4. Try the chart endpoint the cse.lk company page uses, to see how much
+    #    PAST price history we can get. Undocumented - we just print what comes back.
+    #    stockId is a number cse.lk uses internally; companyInfoSummery returns it.
+    if symbols:
+        info = post("companyInfoSummery", {"symbol": symbols[0]})
+        stock_id = info.get("reqSymbolInfo", {}).get("id")
+        print("\nstockId for", symbols[0], "=", stock_id)
+        if stock_id:
+            try:
+                hist = post("companyChartDataByStock", {"stockId": stock_id, "period": 5})
+                save(f"history_{symbols[0]}", hist)
+                print(json.dumps(hist, indent=2)[:800])
+            except Exception as e:
+                print("history request failed:", e)
 
     print("\nNext: check whether any endpoint gives PAST daily prices (try 'chartData'"
           " and 'companyChartDataByStock' in the browser DevTools Network tab on a"
