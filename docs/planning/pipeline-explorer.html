@@ -1,0 +1,801 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>ModelX Pipeline Explorer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column (max 1080px) with sticky section tabs; each section is a self-contained panel. */
+:root{
+  --bg:#f5f7f6; --surface:#ffffff; --ink:#15211d; --muted:#5b6b65; --line:#d7dfdb;
+  --accent:#c77d12;          /* turmeric */
+  --accent-soft:#fbefd9;
+  --teal:#0f6b5c; --teal-soft:#e1f0ec;
+  --warn:#b4540a; --warn-soft:#fdebd9; --good:#2f7d32; --bad:#b3261e;
+  --c-sav:#8a9a94; --c-fd:#3d7ea6; --c-tb:#2e8b57; --c-bond:#6b8e23; --c-utm:#8e6cc0; --c-ute:#c2569a; --c-stk:#d9822b;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1513; --surface:#17201d; --ink:#e6eeeb; --muted:#9aaba4; --line:#2c3935;
+  --accent:#f0a83a; --accent-soft:#3a2c14; --teal:#5cc2ad; --teal-soft:#16302b;
+  --warn:#f2994a; --warn-soft:#3a2614; --good:#7bc47f; --bad:#f28b82;
+  --c-sav:#a3b2ac; --c-fd:#6fb0d8; --c-tb:#5cc98a; --c-bond:#a7c957; --c-utm:#b59ae6; --c-ute:#e57fbe; --c-stk:#f2a35a;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1513; --surface:#17201d; --ink:#e6eeeb; --muted:#9aaba4; --line:#2c3935;
+  --accent:#f0a83a; --accent-soft:#3a2c14; --teal:#5cc2ad; --teal-soft:#16302b;
+  --warn:#f2994a; --warn-soft:#3a2614; --good:#7bc47f; --bad:#f28b82;
+  --c-sav:#a3b2ac; --c-fd:#6fb0d8; --c-tb:#5cc98a; --c-bond:#a7c957; --c-utm:#b59ae6; --c-ute:#e57fbe; --c-stk:#f2a35a;
+  color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:1080px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(28px,4.5vw,42px);font-weight:700;letter-spacing:-.01em}
+h2{font-size:clamp(22px,3vw,28px);font-weight:700}
+h3{font-size:18px;font-weight:600}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-size:.85em}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+header.top{padding-block:32px 20px;display:grid;gap:12px}
+header.top .lead{max-width:68ch;color:var(--muted);font-size:17px}
+.flowline{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--f-mono);font-size:13px}
+.flowline span{padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.flowline b{color:var(--accent);font-weight:600}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  display:flex;gap:4px;overflow-x:auto;padding-block:8px;margin-bottom:24px}
+nav.tabs button{font:600 14px var(--f-body);color:var(--muted);background:none;border:1px solid transparent;border-radius:8px;padding:8px 12px;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);background:var(--surface);border-color:var(--line)}
+nav.tabs button:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section.panel{display:grid;gap:20px}
+.intro{max-width:70ch;color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
+.banner{display:flex;gap:10px;align-items:flex-start;background:var(--warn-soft);color:var(--ink);border:1px solid var(--warn);border-radius:10px;padding:12px 14px;font-size:14px}
+.banner b{color:var(--warn)}
+/* ---------- simulator ---------- */
+.sim{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:20px}
+@media (max-width:760px){.sim{grid-template-columns:minmax(0,1fr)}}
+.form{display:grid;gap:16px;align-content:start;align-self:start}
+.field{display:grid;gap:6px}
+.field label{font-weight:600;font-size:14px}
+.field .hint{font-size:13px;color:var(--muted)}
+input[type=number],select{font:16px var(--f-body);padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);width:100%}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:600 14px var(--f-body);padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:var(--surface)}
+.results{display:grid;gap:18px;min-width:0}
+.alloc-bar{display:flex;height:34px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.alloc-bar div{height:100%;transition:flex-basis .4s ease}
+.legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px 24px;font-size:14px}
+.legend .row{display:flex;align-items:center;gap:8px}
+.legend .sw{width:12px;height:12px;border-radius:3px;flex:none}
+.legend .pct{margin-left:auto;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.legend .amt{color:var(--muted);font-family:var(--f-mono);font-size:12px;min-width:92px;text-align:right;font-variant-numeric:tabular-nums}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.stat{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--bg)}
+.stat .k{font-size:13px;color:var(--muted)}
+.stat .v{font-family:var(--f-display);font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
+.stat .s{font-size:13px;color:var(--muted)}
+.range-wrap{overflow-x:auto}
+svg text{font-family:var(--f-body)}
+.why{font-size:14px;color:var(--muted);border-left:3px solid var(--line);padding-left:12px}
+details.assume summary{cursor:pointer;font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td input[type=number]{width:80px;padding:4px 6px;font-size:14px;text-align:right}
+.tablewrap{overflow-x:auto}
+/* ---------- pipeline ---------- */
+.lanes{display:grid;gap:14px}
+.lane{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;align-items:center}
+@media (max-width:640px){.lane{grid-template-columns:minmax(0,1fr)}}
+.lane .lname{font-family:var(--f-mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.stages{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.stage{font:600 14px var(--f-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;display:flex;gap:8px;align-items:center;transition:background .2s,border-color .2s}
+.stage .n{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.stage:hover{border-color:var(--teal)}
+.stage[aria-pressed="true"]{border-color:var(--teal);background:var(--teal-soft)}
+.stage.lit{border-color:var(--accent);background:var(--accent-soft)}
+.stage.gate{border-style:dashed}
+.arrow{color:var(--muted);font-family:var(--f-mono)}
+.detail{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.detail h4{margin:0 0 4px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-family:var(--f-mono);font-weight:600}
+.detail ul{margin:0;padding-left:18px}
+.chip{display:inline-block;font-family:var(--f-mono);font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--bg);margin:2px 4px 2px 0}
+.chip.warn{border-color:var(--warn);color:var(--warn)}
+.chip.ok{border-color:var(--good);color:var(--good)}
+.chip.teal{border-color:var(--teal);color:var(--teal)}
+.runbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{font:600 14px var(--f-body);padding:9px 16px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);color:#1b1205;cursor:pointer}
+.btn.ghost{background:none;color:var(--ink);border-color:var(--line)}
+.log{font-family:var(--f-mono);font-size:13px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;min-height:150px;max-height:260px;overflow:auto;white-space:pre-wrap}
+.log .t{color:var(--accent)}
+.log .w{color:var(--warn)}
+/* ---------- stack ---------- */
+.arch{overflow-x:auto}
+.cost{display:flex;flex-wrap:wrap;gap:12px}
+/* ---------- broker ---------- */
+.qgroup{display:grid;gap:8px}
+.q{display:flex;gap:10px;align-items:flex-start;font-size:15px}
+.q input{margin-top:5px;accent-color:var(--teal);width:16px;height:16px;flex:none}
+.q.done span{color:var(--muted);text-decoration:line-through}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.timeline{display:grid;gap:6px}
+.tl{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:15px}
+.tl .d{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+/* ---------- quiz ---------- */
+details.quiz{border:1px dashed var(--line);border-radius:8px;padding:8px 10px;font-size:14px}
+details.quiz summary{cursor:pointer;font-weight:600;color:var(--teal)}
+.quizbody{display:grid;gap:10px;margin:10px 0 6px}
+.quizbody fieldset{border:0;margin:0;padding:0;display:grid;gap:4px}
+.quizbody legend{font-weight:600;font-size:13px;padding:0;margin-bottom:2px}
+.quizbody label{display:flex;gap:6px;align-items:flex-start;font-size:13px}
+.quizbody input{accent-color:var(--teal);margin-top:3px}
+/* ---------- product ---------- */
+.wire{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px;background:var(--bg)}
+@media (max-width:760px){.wire{grid-template-columns:minmax(0,1fr)}}
+.wire .col{display:grid;gap:10px;align-content:start}
+.wbox{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px;cursor:pointer;text-align:left;font-family:var(--f-body);color:var(--ink)}
+.wbox:hover,.wbox[aria-pressed="true"]{border-color:var(--teal);background:var(--teal-soft)}
+.wbox b{display:block;font-size:13px;font-family:var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:2px}
+.wbox .src{display:block;font-size:12px;color:var(--muted);margin-top:4px}
+.wbox.core{border-color:var(--accent)}
+.wbox.core b{color:var(--accent)}
+.tag{font-family:var(--f-mono);font-size:11px;padding:1px 6px;border-radius:999px;border:1px solid var(--line);margin-left:4px;vertical-align:middle}
+.tag.must{border-color:var(--good);color:var(--good)}
+.tag.cut{border-color:var(--warn);color:var(--warn)}
+.tag.later{color:var(--muted)}
+/* ---------- refs ---------- */
+.refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:16px}
+.ref{display:grid;gap:10px;align-content:start}
+.ref .site{font-family:var(--f-mono);font-size:12px;color:var(--teal);word-break:break-all}
+.ref .role{font-size:13px;color:var(--muted)}
+.ref h4{margin:6px 0 2px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-family:var(--f-mono);font-weight:600}
+.ref ul{margin:0;padding-left:18px;display:grid;gap:3px;font-size:15px}
+.ref .lands{font-size:14px;border-top:1px solid var(--line);padding-top:10px}
+td.y{color:var(--good);font-weight:600}
+td.n{color:var(--muted)}
+td.us{background:var(--accent-soft)}
+footer{margin-top:40px;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <span class="eyebrow">ModelX 2.0 · Team brief · 15 Oct 2026</span>
+  <h1>How our Sri Lanka investment guide will work</h1>
+  <p class="lead">Think LankaBizz-style market data in a Bloomberg-style multi-panel dashboard, plus the part nobody in Sri Lanka does yet: a personal plan. A person enters how much they have, takes a short risk quiz and picks a goal and time horizon. The tool shows how they could split that money across savings, FDs, treasuries, unit trusts and S&amp;P SL20 shares, a forecast of where the portfolio could go, the chance of losing money, the monthly income, and how it compares with an FD after inflation. Built on public data that refreshes every weekday. Educational, not investment advice.</p>
+  <div class="flowline" aria-label="Pipeline summary">
+    <span>Public data + news</span><b>→</b><span>Daily collection</span><b>→</b><span>Clean tables</span><b>→</b><span>Forecasts vs baseline</span><b>→</b><span>Optimiser</span><b>→</b><span>Monte Carlo</span><b>→</b><span>Dashboard</span>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Sections">
+  <button role="tab" id="t-result" aria-controls="p-result" aria-selected="true">1 · Example plan</button>
+  <button role="tab" id="t-product" aria-controls="p-product" aria-selected="false">2 · What we're building</button>
+  <button role="tab" id="t-refs" aria-controls="p-refs" aria-selected="false">3 · Sites we learn from</button>
+  <button role="tab" id="t-pipe" aria-controls="p-pipe" aria-selected="false">4 · Pipeline</button>
+  <button role="tab" id="t-data" aria-controls="p-data" aria-selected="false">5 · Data sources</button>
+  <button role="tab" id="t-stack" aria-controls="p-stack" aria-selected="false">6 · Stack</button>
+  <button role="tab" id="t-safe" aria-controls="p-safe" aria-selected="false">7 · Safety rails</button>
+  <button role="tab" id="t-broker" aria-controls="p-broker" aria-selected="false">8 · Broker meeting</button>
+</nav>
+
+<!-- ================= 1 RESULT ================= -->
+<section class="panel" id="p-result" role="tabpanel" aria-labelledby="t-result">
+  <div class="banner" role="note"><b>Illustrative only.</b><span>All numbers on this tab come from placeholder assumptions you can edit below. No real market data has been pulled yet. The finished tool replaces them with daily data, ML forecasts and a proper optimiser.</span></div>
+  <div class="sim">
+    <div class="card form" aria-label="Investor inputs">
+      <h3>Investor inputs</h3>
+      <div class="field">
+        <label for="amt">Amount to invest (LKR)</label>
+        <input id="amt" type="number" min="10000" step="10000" value="500000">
+      </div>
+      <div class="field">
+        <label for="risk">Risk appetite: <span id="riskLbl"></span></label>
+        <input id="risk" type="range" min="1" max="5" step="1" value="3">
+        <span class="hint">1 = can't accept any loss · 5 = fine with big swings for higher growth</span>
+        <details class="quiz">
+          <summary>Not sure? Take the 5-question risk quiz</summary>
+          <div id="quiz" class="quizbody"></div>
+          <p class="hint" id="quizOut">Answer all five to set your risk level.</p>
+        </details>
+      </div>
+      <div class="field">
+        <label>Time horizon</label>
+        <div class="seg" id="hz" role="group" aria-label="Time horizon">
+          <button type="button" data-v="1" aria-pressed="false">1 year</button>
+          <button type="button" data-v="3" aria-pressed="true">3 years</button>
+          <button type="button" data-v="5" aria-pressed="false">5 years</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>Goal</label>
+        <div class="seg" id="st" role="group" aria-label="Goal">
+          <button type="button" data-v="income" aria-pressed="false">Monthly income</button>
+          <button type="button" data-v="balanced" aria-pressed="true">Balanced</button>
+          <button type="button" data-v="growth" aria-pressed="false">Growth</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>Might you need the money back early?</label>
+        <div class="seg" id="lq" role="group" aria-label="Liquidity">
+          <button type="button" data-v="yes" aria-pressed="false">Yes, maybe</button>
+          <button type="button" data-v="no" aria-pressed="true">No, I can leave it</button>
+        </div>
+        <span class="hint">"Yes" moves money out of long bonds and shares into things you can cash quickly.</span>
+      </div>
+      <p class="why">In the real tool the split comes from the optimiser (Pipeline stage 8). Here it comes from a simple rule, so you can see the shape of the output.</p>
+    </div>
+
+    <div class="results">
+      <div class="card" style="display:grid;gap:14px">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline">
+          <h3>Suggested split</h3><span class="mono" style="color:var(--muted)">data as of: <b>example</b></span>
+        </div>
+        <div class="alloc-bar" id="bar" aria-hidden="true"></div>
+        <div class="legend" id="legend"></div>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div class="card" style="display:grid;gap:10px">
+        <h3 id="rangeTitle">Portfolio forecast</h3>
+        <div class="range-wrap" id="rangeChart"></div>
+        <p class="why" id="explain"></p>
+      </div>
+    </div>
+  </div>
+
+  <details class="card assume">
+    <summary>Placeholder assumptions (edit to see the effect)</summary>
+    <div class="tablewrap" style="margin-top:12px">
+    <table id="assumeTbl">
+      <thead><tr><th>Instrument</th><th class="num">Expected return %/yr</th><th class="num">Volatility %/yr</th><th class="num">Income %/yr</th><th>Replaced later by</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    </div>
+    <div class="field" style="margin-top:12px;max-width:260px">
+      <label for="infl">Inflation %/yr (placeholder)</label>
+      <input id="infl" type="number" step="0.5" value="5">
+    </div>
+  </details>
+</section>
+
+<!-- ================= PRODUCT ================= -->
+<section class="panel" id="p-product" role="tabpanel" aria-labelledby="t-product" hidden>
+  <p class="intro">Laptop first, beginners first. The home screen is a market dashboard, so people see something useful before they type anything. Click a panel to see what it shows, where the data comes from and which site gave us the idea.</p>
+  <div class="card" style="display:grid;gap:12px">
+    <h3>Home screen (sketch, not the final design)</h3>
+    <div class="wire" id="wire">
+      <div class="col">
+        <button type="button" class="wbox" data-p="headline"><b>Headline insight</b>"An FD at 8% lost about X% of its value after inflation this year"</button>
+        <button type="button" class="wbox" data-p="monitor"><b>Rates monitor</b>FD + savings by bank · T-bill / T-bond yields · ASPI · S&amp;P SL20 · unit trust NAVs · CCPI · USD/LKR · gold</button>
+        <button type="button" class="wbox" data-p="news"><b>News + our sentiment score</b>Local business news, CSE announcements, CBSL releases, a little global</button>
+        <button type="button" class="wbox" data-p="changed"><b>What changed since your last visit</b>e.g. "364-day T-bill yield up 0.3 points"</button>
+        <button type="button" class="wbox" data-p="wrap"><b>Weekly market wrap</b>Short summary of the week, in the style of FGE's wrap-ups</button>
+      </div>
+      <div class="col">
+        <button type="button" class="wbox core" data-p="form"><b>Your plan: inputs</b>Amount · risk quiz · goal · need it back early? · horizon</button>
+        <button type="button" class="wbox core" data-p="split"><b>Your split</b>How much in each option, and why</button>
+        <button type="button" class="wbox core" data-p="forecast"><b>Portfolio forecast</b>Bad / likely / good case over time · chance of loss · FD after inflation · monthly income</button>
+        <button type="button" class="wbox" data-p="why"><b>Preset questions</b>"Why this split?" · "Why so much in T-bills?"</button>
+      </div>
+    </div>
+    <div class="card" id="wireDetail" aria-live="polite" style="background:var(--bg)"></div>
+  </div>
+  <div class="grid2">
+    <div class="card" style="display:grid;gap:8px">
+      <h3>Other pages</h3>
+      <div class="timeline">
+        <div class="tl"><span class="d">Trackers</span><span>Interest rates, inflation, FX and gold, each with a history chart</span><span class="tag must">must-have</span></div>
+        <div class="tl"><span class="d">Unit trusts</span><span>Explorer: NAV, returns and risk; filter and compare funds</span><span class="tag must">must-have</span></div>
+        <div class="tl"><span class="d">Screener</span><span>The 20 S&amp;P SL20 shares by P/E, dividend yield, size</span><span class="tag must">must-have</span></div>
+        <div class="tl"><span class="d">Outlook</span><span>Short economy and sector summary</span><span class="tag must">must-have</span></div>
+      </div>
+    </div>
+    <div class="card" style="display:grid;gap:8px">
+      <h3>Extras and later</h3>
+      <div class="timeline">
+        <div class="tl"><span class="d">Extra 1</span><span>News with our own sentiment score</span><span class="tag must">keep</span></div>
+        <div class="tl"><span class="d">Extra 2</span><span>"What changed since your last visit" (on the page, no emails)</span><span class="tag must">keep</span></div>
+        <div class="tl"><span class="d">Extra 3</span><span>Preset question buttons instead of an AI chat</span><span class="tag cut">first to cut</span></div>
+        <div class="tl"><span class="d">After 1 Nov</span><span>Enter a portfolio you already hold and get a forecast on it</span><span class="tag later">stretch</span></div>
+        <div class="tl"><span class="d">After 1 Nov</span><span>Optional login to save plans</span><span class="tag later">decide later</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REFERENCE SITES ================= -->
+<section class="panel" id="p-refs" role="tabpanel" aria-labelledby="t-refs" hidden>
+  <p class="intro">Four sites shaped the plan. None of them tells a beginner how to split their own money across FDs, treasuries, unit trusts and shares, and then shows what that split might do. That is the gap we fill.</p>
+  <div class="refs">
+    <div class="card ref">
+      <div><h3>Bloomberg Terminal</h3><span class="site">professional.bloomberg.com/products/bloomberg-terminal</span></div>
+      <p class="role">The professional's tool: data, news, research, analytics and charts in one workspace. Built for traders and fund managers.</p>
+      <div><h4>What we take</h4><ul><li>Multi-panel layout: many small panels on one screen (their Launchpad workspace)</li><li>Market monitors where each number has a time stamp</li><li>News next to the numbers it affects</li><li>Plain-English help for new users (their Terminal Essentials videos)</li></ul></div>
+      <div><h4>What we leave</h4><ul><li>The dark terminal look and keyboard commands</li><li>Trading, messaging, pro-only depth</li></ul></div>
+      <p class="lands"><b>Shows up as:</b> the home dashboard layout and the "data as of" stamps.</p>
+    </div>
+    <div class="card ref">
+      <div><h3>LankaBizz</h3><span class="site">lankabizz.net</span></div>
+      <p class="role">Sri Lankan business and market-data site: economy trackers, CSE data, unit trusts, news, AI stock picks, AI chat. Most of it needs a free sign-up.</p>
+      <div><h4>What we take</h4><ul><li>Tracker pages: interest rates, inflation, FX, gold</li><li>Unit trust explorer</li><li>Stock screener (we limit it to S&amp;P SL20)</li><li>Economy / sector outlook</li><li>Business news section</li></ul></div>
+      <div><h4>What we leave</h4><ul><li>AI stock picks and trading signals: we stay at the level of a whole plan, not "buy this share"</li><li>Open AI chat: we use preset questions instead</li></ul></div>
+      <p class="lands"><b>Shows up as:</b> the rates monitor and the four extra pages.</p>
+    </div>
+    <div class="card ref">
+      <div><h3>Waraka.lk</h3><span class="site">waraka.lk</span></div>
+      <p class="role">Sri Lanka's unit trust platform: compare, analyse and invest in 80+ funds from licensed fund managers.</p>
+      <div><h4>What we take</h4><ul><li>The idea of a forecast on a portfolio, not just past returns</li><li>Comparing funds side by side</li><li>Possibly fund NAV data, only if their terms allow it</li></ul></div>
+      <div><h4>What we leave</h4><ul><li>Unit trusts only: we cover FDs, treasuries and shares too</li><li>Selling funds: we don't take money or place orders</li></ul></div>
+      <p class="lands"><b>Shows up as:</b> the portfolio forecast panel. Later: entering a portfolio you already hold.</p>
+    </div>
+    <div class="card ref">
+      <div><h3>First Guardian Equities</h3><span class="site">fge.lk/market-insight</span></div>
+      <p class="role">An SEC-licensed stockbroker and CSE trading participant. Posts weekly market updates (as images) and monthly market wrap-ups.</p>
+      <div><h4>What we take</h4><ul><li>Format for our own weekly market wrap</li><li>Monthly wrap-ups cited as a source in the outlook page and proposal</li><li>Which news actually matters to investors</li><li>Their risk wording: "past performance doesn't guarantee future results"</li></ul></div>
+      <div><h4>What we leave</h4><ul><li>Using their weekly images as a data feed (images, and the latest weekly one we saw was from May)</li></ul></div>
+      <p class="lands"><b>Shows up as:</b> the weekly wrap panel, cited sources, disclaimer wording.</p>
+    </div>
+  </div>
+  <div class="card tablewrap" style="display:grid;gap:10px">
+    <h3>Who does what</h3>
+    <table>
+      <thead><tr><th>Feature</th><th>Bloomberg</th><th>LankaBizz</th><th>Waraka</th><th>FGE</th><th>ModelX (ours)</th></tr></thead>
+      <tbody>
+        <tr><td>Rates, inflation, FX trackers</td><td class="y">yes</td><td class="y">yes</td><td class="n">–</td><td class="n">–</td><td class="us y">yes</td></tr>
+        <tr><td>Unit trust comparison</td><td class="n">–</td><td class="y">yes</td><td class="y">yes (80+ funds)</td><td class="n">–</td><td class="us y">yes</td></tr>
+        <tr><td>Stock screener</td><td class="y">yes</td><td class="y">yes</td><td class="n">–</td><td class="n">–</td><td class="us y">SL20 only</td></tr>
+        <tr><td>Market news / wrap-ups</td><td class="y">yes</td><td class="y">yes</td><td class="n">–</td><td class="y">weekly + monthly</td><td class="us y">yes + our own sentiment score</td></tr>
+        <tr><td>AI stock picks</td><td class="n">–</td><td class="y">yes</td><td class="n">–</td><td class="n">–</td><td class="us n">no, on purpose</td></tr>
+        <tr><td>Splits <i>your</i> money across FDs, treasuries, unit trusts and shares</td><td class="n">–</td><td class="n">–</td><td class="n">unit trusts only</td><td class="n">in person, as a broker</td><td class="us y">yes</td></tr>
+        <tr><td>Range, chance of loss and FD-after-inflation comparison</td><td class="n">–</td><td class="n">–</td><td class="n">–</td><td class="n">–</td><td class="us y">yes</td></tr>
+        <tr><td>Free, no sign-up needed</td><td class="n">paid</td><td class="n">free sign-up</td><td class="n">–</td><td class="y">yes</td><td class="us y">yes</td></tr>
+      </tbody>
+    </table>
+    <p class="why">"–" means we haven't seen it on their public pages, not that it doesn't exist. To be checked properly for the proposal's "existing solutions" section.</p>
+  </div>
+</section>
+
+<!-- ================= 2 PIPELINE ================= -->
+<section class="panel" id="p-pipe" role="tabpanel" aria-labelledby="t-pipe" hidden>
+  <p class="intro">Ten stages, in three layers. Click any stage to see what happens there, why it matters to the judges, which tools it uses and who owns it. <b>Run one day</b> plays through a normal weekday.</p>
+  <div class="card lanes" id="lanes"></div>
+  <div class="card" id="stageDetail" aria-live="polite"></div>
+  <div class="card" style="display:grid;gap:12px">
+    <div class="runbar">
+      <button class="btn" id="runDay" type="button">Run one day</button>
+      <label style="display:flex;gap:8px;align-items:center;font-size:14px"><input type="checkbox" id="failSrc"> Simulate a source going down</label>
+      <label style="display:flex;gap:8px;align-items:center;font-size:14px"><input type="checkbox" id="weakModel"> Simulate the ML losing to the baseline</label>
+    </div>
+    <div class="log" id="log" aria-live="polite">Press "Run one day" to watch a weekday go through the pipeline.</div>
+  </div>
+</section>
+
+<!-- ================= 3 DATA ================= -->
+<section class="panel" id="p-data" role="tabpanel" aria-labelledby="t-data" hidden>
+  <p class="intro">Data work is 30% of the implementation marks, and the Best Data Vision award judges data alone. Every source needs to answer five things: where it comes from, how we get it, how far back it goes, how often it updates, and what gives us the right to use it. Status shows what we've actually checked as of 15 Oct.</p>
+  <div class="card tablewrap">
+    <table>
+      <thead><tr><th>Instrument</th><th>Source</th><th>How we get it</th><th>Updates</th><th>History</th><th>Right to use</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>S&amp;P SL20 shares (part of CSE)</td><td>Colombo Stock Exchange, cse.lk</td><td>Public JSON endpoints used by the CSE site (undocumented)</td><td>Daily, after 2:30pm close</td><td>Unknown, biggest risk</td><td>robots.txt allows all but /cgi-bin/; terms still to read</td><td><span class="chip warn">to verify</span></td></tr>
+        <tr><td>Treasury bills (91/182/364 day)</td><td>CBSL weekly auction results</td><td>CBSL Data Library export</td><td>Weekly</td><td>Many years expected</td><td>Public central bank statistics</td><td><span class="chip warn">to verify</span></td></tr>
+        <tr><td>Treasury bonds</td><td>CBSL auctions + secondary market yields</td><td>CBSL Data Library export</td><td>Weekly / daily</td><td>Many years expected</td><td>Public central bank statistics</td><td><span class="chip warn">to verify</span></td></tr>
+        <tr><td>Fixed deposits</td><td>CBSL AWFDR, plus bank rate pages</td><td>CBSL export; bank pages by hand</td><td>Monthly</td><td>Many years expected</td><td>Public</td><td><span class="chip warn">to verify</span></td></tr>
+        <tr><td>Savings account</td><td>CBSL AWDR</td><td>CBSL export</td><td>Monthly</td><td>Many years expected</td><td>Public</td><td><span class="chip warn">to verify</span></td></tr>
+        <tr><td>Inflation (for real returns)</td><td>CBSL / DCS, CCPI</td><td>CBSL export</td><td>Monthly, published with a lag</td><td>Many years expected</td><td>Public</td><td><span class="chip warn">to verify</span></td></tr>
+        <tr><td>Unit trusts (one per fund type)</td><td>Fund managers' daily NAVs, or waraka.lk</td><td>Fund sites, or waraka.lk's data feed if permitted</td><td>Daily</td><td>Unknown</td><td>waraka.lk terms unclear, ask or use fund sites</td><td><span class="chip warn">to verify</span></td></tr>
+        <tr><td>Listed debentures</td><td>CSE debt listings</td><td>To find</td><td>–</td><td>Unknown</td><td>–</td><td><span class="chip">only if data exists</span></td></tr>
+        <tr><td>Gold</td><td>Local LKR gold price</td><td>To find</td><td>Daily</td><td>Unknown</td><td>–</td><td><span class="chip">only if data exists</span></td></tr>
+        <tr><td>ASPI and S&amp;P SL20 index</td><td>cse.lk</td><td>Same CSE endpoints as shares</td><td>Daily</td><td>Unknown</td><td>As for CSE shares</td><td><span class="chip warn">to verify</span></td></tr>
+        <tr><td>USD/LKR</td><td>CBSL exchange rates</td><td>CBSL export</td><td>Daily</td><td>Many years expected</td><td>Public central bank statistics</td><td><span class="chip warn">to verify</span></td></tr>
+        <tr><td>News: local</td><td>Sri Lankan business news sites</td><td>RSS, headline + link only</td><td>Daily</td><td>From when we start collecting</td><td>Only sites whose terms allow it</td><td><span class="chip warn">to choose</span></td></tr>
+        <tr><td>News: CSE announcements</td><td>cse.lk company disclosures</td><td>CSE endpoints</td><td>Daily</td><td>Unknown</td><td>As for CSE shares</td><td><span class="chip warn">to verify</span></td></tr>
+        <tr><td>News: CBSL press releases</td><td>cbsl.gov.lk</td><td>Press release page / RSS</td><td>As released</td><td>Many years</td><td>Public</td><td><span class="chip warn">to verify</span></td></tr>
+        <tr><td>News: a little global</td><td>Global feed (oil, US rates, IMF)</td><td>RSS</td><td>Daily</td><td>From when we start collecting</td><td>Only feeds whose terms allow it</td><td><span class="chip warn">to choose</span></td></tr>
+        <tr><td>Sentiment score</td><td>Our own, on the headlines above</td><td>LLM API if we get a student plan or free credits, otherwise FinBERT</td><td>Daily</td><td>–</td><td>We create it</td><td><span class="chip">decided</span></td></tr>
+        <tr><td>Market wrap-ups (cited)</td><td>FGE monthly market wrap-ups</td><td>Read and cite with a link; not scraped</td><td>Monthly</td><td>Nov 2025 onwards seen</td><td>Cited, not copied</td><td><span class="chip">decided</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="why">Rule of thumb: we want 3+ years of daily or weekly history to train on. A source that only gives today's value can still feed the live site, but it needs a separate history source.</p>
+</section>
+
+<!-- ================= 4 STACK ================= -->
+<section class="panel" id="p-stack" role="tabpanel" aria-labelledby="t-stack" hidden>
+  <p class="intro">Everything runs on free services. There's no server to rent: GitHub runs the daily Python job and stores the data as JSON files, and Vercel hosts the Next.js website that reads them.</p>
+  <div class="card arch">
+    <svg viewBox="0 0 980 340" width="100%" style="min-width:720px" role="img" aria-label="Architecture: GitHub Actions collects data daily into the repo; Vercel builds the Next.js site from the repo and serves it">
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>
+      <!-- sources -->
+      <g>
+        <rect x="16" y="40" width="190" height="260" rx="12" fill="var(--bg)" stroke="var(--line)"/>
+        <text x="32" y="68" font-size="15" font-weight="600" fill="var(--ink)">Public sources</text>
+        <text x="32" y="98" font-size="13" fill="var(--muted)">cse.lk (S&amp;P SL20)</text>
+        <text x="32" y="122" font-size="13" fill="var(--muted)">CBSL Data Library</text>
+        <text x="32" y="146" font-size="13" fill="var(--muted)">Unit trust NAVs</text>
+        <text x="32" y="170" font-size="13" fill="var(--muted)">Bank FD rates</text>
+        <text x="32" y="194" font-size="13" fill="var(--muted)">News RSS + CBSL releases</text>
+        <text x="32" y="218" font-size="13" fill="var(--muted)">LLM API / FinBERT</text>
+        <text x="32" y="270" font-size="12" fill="var(--muted)">we only read, never log in</text>
+      </g>
+      <!-- github -->
+      <g>
+        <rect x="262" y="24" width="420" height="292" rx="12" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+        <text x="280" y="50" font-size="15" font-weight="600" fill="var(--ink)">GitHub (public repo, free)</text>
+        <rect x="280" y="66" width="184" height="104" rx="10" fill="var(--surface)" stroke="var(--line)"/>
+        <text x="294" y="90" font-size="14" font-weight="600" fill="var(--ink)">GitHub Actions</text>
+        <text x="294" y="112" font-size="12" fill="var(--muted)">weekdays 6:00pm SLT</text>
+        <text x="294" y="130" font-size="12" fill="var(--muted)">runs pull scripts</text>
+        <text x="294" y="148" font-size="12" fill="var(--muted)">+ rebuilds forecasts</text>
+        <rect x="480" y="66" width="184" height="104" rx="10" fill="var(--surface)" stroke="var(--line)"/>
+        <text x="494" y="90" font-size="14" font-weight="600" fill="var(--ink)">data/ folder</text>
+        <text x="494" y="112" font-size="12" fill="var(--muted)">raw/ untouched pulls</text>
+        <text x="494" y="130" font-size="12" fill="var(--muted)">clean/ tidy tables</text>
+        <text x="494" y="148" font-size="12" fill="var(--muted)">outputs/ JSON for site</text>
+        <rect x="280" y="190" width="384" height="108" rx="10" fill="var(--surface)" stroke="var(--line)"/>
+        <text x="294" y="214" font-size="14" font-weight="600" fill="var(--ink)">Python code (src/)</text>
+        <text x="294" y="236" font-size="12" fill="var(--muted)">pandas · requests · feedparser</text>
+        <text x="294" y="254" font-size="12" fill="var(--muted)">statsmodels (ARIMA) · Prophet · arch (GARCH)</text>
+        <text x="294" y="272" font-size="12" fill="var(--muted)">PyPortfolioOpt · numpy (Monte Carlo)</text>
+        <text x="294" y="290" font-size="12" fill="var(--muted)">every commit = visible history for judges</text>
+      </g>
+      <!-- streamlit -->
+      <g>
+        <rect x="736" y="66" width="228" height="104" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+        <text x="752" y="90" font-size="14" font-weight="600" fill="var(--ink)">Vercel (Next.js / React)</text>
+        <text x="752" y="112" font-size="12" fill="var(--ink)">free hosting, rebuilds</text>
+        <text x="752" y="130" font-size="12" fill="var(--ink)">on every push</text>
+        <text x="752" y="148" font-size="12" fill="var(--ink)">reads data/outputs JSON</text>
+        <rect x="736" y="210" width="228" height="80" rx="10" fill="var(--surface)" stroke="var(--line)"/>
+        <text x="752" y="236" font-size="14" font-weight="600" fill="var(--ink)">Investor's browser</text>
+        <text x="752" y="258" font-size="12" fill="var(--muted)">laptop first, no login</text>
+        <text x="752" y="276" font-size="12" fill="var(--muted)">plan is worked out in the page</text>
+      </g>
+      <g fill="none" stroke="var(--muted)" stroke-width="1.5">
+        <path d="M206 118H280" marker-end="url(#ah)"/>
+        <path d="M464 118H480" marker-end="url(#ah)"/>
+        <path d="M664 118H736" marker-end="url(#ah)"/>
+        <path d="M850 170V210" marker-end="url(#ah)"/>
+        <path d="M572 170V190" marker-start="url(#ah)"/>
+      </g>
+      <text x="212" y="108" font-size="11" fill="var(--muted)">HTTPS</text>
+      <text x="670" y="108" font-size="11" fill="var(--muted)">git push</text>
+    </svg>
+  </div>
+  <div class="grid2">
+    <div class="card" style="display:grid;gap:10px">
+      <h3>Why these choices</h3>
+      <ul style="margin:0;padding-left:18px;display:grid;gap:6px">
+        <li><b>Python for data and models, React for the site:</b> the team knows both, and a dashboard like Bloomberg's needs the layout control React gives.</li>
+        <li><b>GitHub Actions</b> instead of an AI agent (D5): reliable, free, and every daily pull shows up in the git history the judges score.</li>
+        <li><b>JSON files in the repo</b> instead of a database: the data is small (tens of MB), and git keeps every version for free.</li>
+        <li><b>Vercel:</b> free hosting for Next.js that rebuilds the site whenever the daily job pushes new data.</li>
+        <li><b>No login yet:</b> nothing personal is stored before 1 Nov; a saved-plans login is decided after.</li>
+      </ul>
+    </div>
+    <div class="card" style="display:grid;gap:10px">
+      <h3>Cost and limits</h3>
+      <div class="cost">
+        <span class="chip ok">GitHub public repo: free</span>
+        <span class="chip ok">Actions on public repos: free</span>
+        <span class="chip ok">Vercel hobby plan: free</span>
+        <span class="chip ok">FinBERT: open model</span>
+        <span class="chip warn">LLM API: only with a student plan / free credits</span>
+      </div>
+      <p class="why">Limits to plan around: Action schedules can run a few minutes late. Headlines are scored once inside the daily job, never live, so the site stays fast and the LLM bill stays at zero or close to it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5 SAFETY ================= -->
+<section class="panel" id="p-safe" role="tabpanel" aria-labelledby="t-safe" hidden>
+  <p class="intro">The final is scored partly on how the system handles what it doesn't know. These are the rules the tool follows, and each one is visible to the user.</p>
+  <div class="grid2">
+    <div class="card"><h3>Never promises profit</h3><p style="margin-top:6px">Every result is a range, with the chance of loss stated next to it (D2). We never show a single "you will earn" number.</p></div>
+    <div class="card"><h3>Shows how fresh the data is</h3><p style="margin-top:6px">Every number carries a "data as of" date (D3). If a source misses a day, the site keeps the last good value and shows a stale-data warning.</p></div>
+    <div class="card"><h3>Falls back to the baseline</h3><p style="margin-top:6px">ML forecasts are only used where they beat a simple historical average on unseen data (D4). Otherwise the tool uses the average and says the data is too weak to do better.</p></div>
+    <div class="card"><h3>Checks itself against an FD</h3><p style="margin-top:6px">Every split is compared with keeping it all in an FD after inflation, so the user can see if the extra risk is worth it.</p></div>
+    <div class="card"><h3>Says what it can't see</h3><p style="margin-top:6px">It doesn't cover personal tax situations, fees, liquidity needs or company-specific news. It says so on the result screen.</p></div>
+    <div class="card"><h3>Preset questions, not a chatbot</h3><p style="margin-top:6px">"Why this split?" answers are written from the actual numbers behind the plan, so the tool can't make things up the way a free-text AI chat can.</p></div>
+    <div class="card"><h3>News is context, not a signal</h3><p style="margin-top:6px">The sentiment score is shown next to headlines. It only enters a forecast if it beats the baseline in testing, like any other input.</p></div>
+    <div class="card"><h3>Educational, not advice</h3><p style="margin-top:6px">There are no buy or sell instructions on named shares, and there is a clear disclaimer. Wording to be checked with the stockbroker and against SEC Sri Lanka rules.</p></div>
+  </div>
+</section>
+
+<!-- ================= 6 BROKER ================= -->
+<section class="panel" id="p-broker" role="tabpanel" aria-labelledby="t-broker" hidden>
+  <p class="intro">Questions to take to the stockbroker. Tick them off in the meeting; ticks are saved in this browser only.</p>
+  <div class="grid2" id="qs"></div>
+  <div class="card" style="display:grid;gap:10px">
+    <h3>Timeline</h3>
+    <div class="timeline">
+      <div class="tl"><span class="d">15 Oct</span><span>Bucket 1: prove every data source works</span><span class="chip warn">in progress</span></div>
+      <div class="tl"><span class="d">19 Oct</span><span>Submission 1: proposal</span><span class="chip teal">deadline</span></div>
+      <div class="tl"><span class="d">22 Oct</span><span>Bucket 3: daily pipeline running</span><span class="chip">planned</span></div>
+      <div class="tl"><span class="d">26 Oct</span><span>Bucket 4: forecasts + baseline</span><span class="chip">planned</span></div>
+      <div class="tl"><span class="d">28 Oct</span><span>Bucket 5: optimiser + simulation</span><span class="chip">planned</span></div>
+      <div class="tl"><span class="d">30 Oct</span><span>Bucket 6: Next.js dashboard on Vercel</span><span class="chip">planned</span></div>
+      <div class="tl"><span class="d">1 Nov</span><span>Submission 2: report, repo, 2-page summary, 3-min video</span><span class="chip teal">deadline</span></div>
+      <div class="tl"><span class="d">14 Nov</span><span>Final: live pitch</span><span class="chip teal">final</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>ModelX 2.0 team entry · Educational tool, not investment advice · Example numbers on tab 1 are placeholders, not market data.</footer>
+</div>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const fmt=n=>"LKR "+Math.round(n).toLocaleString("en-LK");
+const pct=(n,d=1)=>(n*100).toFixed(d)+"%";
+
+/* ---------- tabs ---------- */
+const tabs=[...document.querySelectorAll('nav.tabs button')];
+function showTab(btn){tabs.forEach(b=>{const on=b===btn;b.setAttribute('aria-selected',on);document.getElementById(b.getAttribute('aria-controls')).hidden=!on});
+  try{localStorage.setItem('mx-tab',btn.id)}catch(e){}}
+tabs.forEach(b=>b.addEventListener('click',()=>showTab(b)));
+try{const t=localStorage.getItem('mx-tab');if(t&&document.getElementById(t))showTab(document.getElementById(t))}catch(e){}
+const h=location.hash.replace('#','');if(h&&document.getElementById('t-'+h))showTab(document.getElementById('t-'+h));
+
+/* ---------- simulator ---------- */
+const INS=[
+ {k:'sav',name:'Savings account',r:3,v:0.5,inc:3,col:'--c-sav',later:'CBSL AWDR'},
+ {k:'fd',name:'Fixed deposits',r:8,v:0.5,inc:8,col:'--c-fd',later:'CBSL AWFDR + bank rates'},
+ {k:'tb',name:'Treasury bills',r:8,v:0.5,inc:8,col:'--c-tb',later:'CBSL auction yields'},
+ {k:'bond',name:'Treasury bonds',r:10,v:6,inc:9,col:'--c-bond',later:'CBSL yields + rate forecast'},
+ {k:'utm',name:'Unit trusts: money market / income',r:8.5,v:1.5,inc:8.5,col:'--c-utm',later:'Fund NAV history'},
+ {k:'ute',name:'Unit trusts: balanced / equity',r:12,v:14,inc:2,col:'--c-ute',later:'NAV history + time-series forecast'},
+ {k:'stk',name:'S&P SL20 shares',r:15,v:22,inc:4,col:'--c-stk',later:'CSE prices + dividends + time-series forecast'}];
+// placeholder split rule by risk level (sav, fd, tb, bond, utm, ute, stk)
+const BASE={1:[10,35,35,5,15,0,0],2:[5,25,25,15,20,5,5],3:[5,15,15,20,15,15,15],4:[0,10,10,15,10,25,30],5:[0,5,5,10,5,30,45]};
+const RISKL={1:'Very low',2:'Low',3:'Medium',4:'High',5:'Very high'};
+let state={hz:3,st:'balanced',lq:'no'};
+
+function weights(){
+  const risk=+$('#risk').value; let w=BASE[risk].slice();
+  if(state.st==='income'){w[6]*=0.5;w[5]*=0.7;w[3]+=5;w[4]+=5}
+  if(state.st==='growth'){w[6]*=1.25;w[5]*=1.15;w[1]*=0.8;w[2]*=0.8}
+  if(state.lq==='yes'){const cut=w[3]*0.7+w[6]*0.3+w[1]*0.4;w[3]*=0.3;w[6]*=0.7;w[1]*=0.6;w[0]+=cut*0.3;w[4]+=cut*0.4;w[2]+=cut*0.3}
+  if(state.hz===1){const cut=(w[6]+w[5])*0.6;w[6]*=0.4;w[5]*=0.4;w[2]+=cut*0.6;w[4]+=cut*0.4}
+  const s=w.reduce((a,b)=>a+b,0);return w.map(x=>x/s);
+}
+// seeded RNG so the chart doesn't jitter
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function gauss(r){let u=0,v=0;while(!u)u=r();while(!v)v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+function simulate(w){
+  const N=4000,Y=state.hz,r=rng(42),amt=+$('#amt').value||0,infl=(+$('#infl').value||0)/100;
+  const byYear=Array.from({length:Y},()=>[]);
+  for(let i=0;i<N;i++){
+    let val=amt;
+    for(let y=0;y<Y;y++){
+      const mkt=gauss(r); let g=0;
+      INS.forEach((ins,j)=>{if(!w[j])return;const own=gauss(r);
+        const eq=(ins.k==='stk'||ins.k==='ute'||ins.k==='bond');
+        const z=eq?0.6*mkt+0.8*own:own; g+=w[j]*(ins.r/100+ins.v/100*z)});
+      val*=1+g; byYear[y].push(val);
+    }
+  }
+  byYear.forEach(a=>a.sort((x,z)=>x-z));
+  const qq=(a,p)=>a[Math.floor(p*(N-1))];
+  const fan=byYear.map((a,y)=>({y:y+1,p5:qq(a,.05),p25:qq(a,.25),p50:qq(a,.5),p75:qq(a,.75),p95:qq(a,.95),fd:amt*Math.pow(1+INS[1].r/100,y+1)}));
+  const ends=byYear[Y-1], q=p=>qq(ends,p);
+  const loss=ends.filter(x=>x<amt).length/N;
+  const fdEnd=fan[Y-1].fd;
+  const deflate=x=>x/Math.pow(1+infl,Y);
+  const monthly=INS.reduce((s,ins,j)=>s+w[j]*amt*ins.inc/100/12,0);
+  return {amt,Y,fan,infl,monthly,p10:q(.10),p50:q(.5),p90:q(.9),p5:q(.05),p95:q(.95),loss,fdEnd,
+    realP50:deflate(q(.5)),realFd:deflate(fdEnd),beatFd:ends.filter(x=>x>fdEnd).length/N};
+}
+function render(){
+  $('#riskLbl').textContent=RISKL[$('#risk').value];
+  const w=weights(),amt=+$('#amt').value||0;
+  $('#bar').innerHTML=INS.map((ins,j)=>w[j]>0.001?`<div style="flex-basis:${w[j]*100}%;background:var(${ins.col})" title="${ins.name} ${pct(w[j],0)}"></div>`:'').join('');
+  $('#legend').innerHTML=INS.map((ins,j)=>`<div class="row"><span class="sw" style="background:var(${ins.col})"></span><span>${ins.name}</span><span class="pct">${pct(w[j],0)}</span><span class="amt">${fmt(w[j]*amt)}</span></div>`).join('');
+  const s=simulate(w);
+  const realGain=s.realP50-s.amt;
+  $('#stats').innerHTML=`
+   <div class="stat"><div class="k">Middle outcome after ${s.Y} yr</div><div class="v">${fmt(s.p50)}</div><div class="s">${pct(Math.pow(s.p50/s.amt,1/s.Y)-1)} a year</div></div>
+   <div class="stat"><div class="k">Chance of ending below what you put in</div><div class="v" style="color:${s.loss>0.15?'var(--bad)':s.loss>0.05?'var(--warn)':'var(--good)'}">${pct(s.loss,0)}</div><div class="s">across 4,000 simulated paths</div></div>
+   <div class="stat"><div class="k">All in an FD instead</div><div class="v">${fmt(s.fdEnd)}</div><div class="s">this split beats it in ${pct(s.beatFd,0)} of paths</div></div>
+   <div class="stat"><div class="k">Middle outcome after inflation</div><div class="v" style="color:${realGain<0?'var(--bad)':'var(--ink)'}">${realGain>=0?'+':''}${fmt(realGain)}</div><div class="s">FD after inflation: ${s.realFd-s.amt>=0?'+':''}${fmt(s.realFd-s.amt)}</div></div>
+   <div class="stat"><div class="k">Expected monthly income</div><div class="v">${fmt(s.monthly)}</div><div class="s">interest + dividends, before tax</div></div>`;
+  drawFan(s);
+  $('#rangeTitle').textContent=`Portfolio forecast: ${fmt(s.amt)} over ${s.Y} year${s.Y>1?'s':''}`;
+  $('#explain').textContent=`Dark band: half of the 4,000 simulated paths. Light band: 9 in 10 paths (${fmt(s.p5)} to ${fmt(s.p95)} at the end). The line is the middle path. The dashed line is the same money in an FD; the red line is what you put in. In ${pct(s.loss,0)} of paths the investor ended with less than they put in. The real tool replaces the placeholder returns with forecasts that have been tested against a baseline.`;
+}
+function drawFan(s){
+  const W=640,H=240,pl=56,pr=86,pt=14,pb=28;
+  const pts=[{y:0,p5:s.amt,p25:s.amt,p50:s.amt,p75:s.amt,p95:s.amt,fd:s.amt},...s.fan];
+  const lo=Math.min(...pts.map(p=>p.p5))*0.97,hi=Math.max(...pts.map(p=>Math.max(p.p95,p.fd)))*1.02;
+  const X=y=>pl+y/s.Y*(W-pl-pr), Yp=v=>pt+(hi-v)/(hi-lo)*(H-pt-pb);
+  const ink=css('--ink'),muted=css('--muted'),acc=css('--accent'),teal=css('--teal'),line=css('--line'),bad=css('--bad');
+  const short=v=>(v/1e6>=1?(v/1e6).toFixed(2)+'M':Math.round(v/1e3)+'k');
+  const band=(a,b)=>pts.map(p=>`${X(p.y)},${Yp(p[a])}`).join(' ')+' '+pts.slice().reverse().map(p=>`${X(p.y)},${Yp(p[b])}`).join(' ');
+  const path=k=>pts.map((p,i)=>`${i?'L':'M'}${X(p.y)} ${Yp(p[k])}`).join('');
+  const ticks=[lo,(lo+hi)/2,hi].map(v=>`<line x1="${pl}" x2="${W-pr}" y1="${Yp(v)}" y2="${Yp(v)}" stroke="${line}"/><text x="${pl-6}" y="${Yp(v)+4}" font-size="11" text-anchor="end" fill="${muted}">${short(v)}</text>`).join('');
+  const xt=pts.map(p=>`<text x="${X(p.y)}" y="${H-8}" font-size="11" text-anchor="middle" fill="${muted}">${p.y?'yr '+p.y:'today'}</text>`).join('');
+  const e=pts[pts.length-1], ex=X(s.Y)+6;
+  const labs=[['good '+short(e.p95),e.p95,muted],['likely '+short(e.p50),e.p50,ink],['bad '+short(e.p5),e.p5,muted],['FD '+short(e.fd),e.fd,ink]]
+    .sort((a,b)=>b[1]-a[1]); let lastY=-99;
+  const lt=labs.map(([t,v,c])=>{let yy=Math.max(Yp(v)+4,lastY+14);lastY=yy;return `<text x="${ex}" y="${yy}" font-size="11" fill="${c}" font-weight="${t.startsWith('likely')?600:400}">${t}</text>`}).join('');
+  $('#rangeChart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:460px" role="img" aria-label="Fan chart of portfolio value over time">
+   ${ticks}
+   <polygon points="${band('p95','p5')}" fill="${teal}" opacity=".15"/>
+   <polygon points="${band('p75','p25')}" fill="${teal}" opacity=".3"/>
+   <line x1="${pl}" x2="${W-pr}" y1="${Yp(s.amt)}" y2="${Yp(s.amt)}" stroke="${bad}" stroke-width="1.2"/>
+   <path d="${path('fd')}" fill="none" stroke="${ink}" stroke-width="1.5" stroke-dasharray="5 4"/>
+   <path d="${path('p50')}" fill="none" stroke="${acc}" stroke-width="2.5"/>
+   ${pts.map(p=>`<circle cx="${X(p.y)}" cy="${Yp(p.p50)}" r="3" fill="${acc}"/>`).join('')}
+   <text x="${pl+4}" y="${Yp(s.amt)+14}" font-size="11" fill="${bad}">you put in ${short(s.amt)}</text>
+   ${xt}${lt}
+  </svg>`;
+}
+// assumptions table
+$('#assumeTbl tbody').innerHTML=INS.map((ins,j)=>`<tr><td><span class="sw" style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(${ins.col});margin-right:6px"></span>${ins.name}</td>
+ <td class="num"><input type="number" step="0.5" id="r-${ins.k}" value="${ins.r}" aria-label="${ins.name} expected return"></td>
+ <td class="num"><input type="number" step="0.5" id="v-${ins.k}" value="${ins.v}" aria-label="${ins.name} volatility"></td>
+ <td class="num"><input type="number" step="0.5" id="i-${ins.k}" value="${ins.inc}" aria-label="${ins.name} income yield"></td><td>${ins.later}</td></tr>`).join('');
+INS.forEach(ins=>{[['r','r'],['v','v'],['i','inc']].forEach(([f,key])=>$(`#${f}-${ins.k}`).addEventListener('input',e=>{ins[key]=+e.target.value||0;render()}))});
+['#amt','#risk','#infl'].forEach(s=>$(s).addEventListener('input',render));
+function seg(id,key,num){document.querySelectorAll(id+' button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll(id+' button').forEach(x=>x.setAttribute('aria-pressed',x===b));state[key]=num?+b.dataset.v:b.dataset.v;render()}))}
+seg('#hz','hz',true);seg('#st','st',false);seg('#lq','lq',false);
+render();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',render);
+new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+/* ---------- risk quiz (placeholder questions, to check with the broker) ---------- */
+const QUIZ=[
+ ['If your investment fell 15% in a year, you would…',[['Sell everything',1],['Wait it out',3],['Buy more',5]]],
+ ['When will you need most of this money?',[['Within a year',1],['In 1–3 years',2],['In 3–5 years',4],['After 5 years',5]]],
+ ['What have you invested in before?',[['Only savings / FDs',1],['Unit trusts or T-bills',3],['Shares',5]]],
+ ['Which would you pick?',[['A sure 8%',1],['Likely 11%, could lose 5%',3],['Likely 16%, could lose 20%',5]]],
+ ['Apart from this money, do you have emergency savings?',[['None',1],['A little',3],['6+ months of expenses',5]]]];
+$('#quiz').innerHTML=QUIZ.map(([q,opts],i)=>`<fieldset><legend>${i+1}. ${q}</legend>${opts.map(([t,v])=>`<label><input type="radio" name="qz${i}" value="${v}">${t}</label>`).join('')}</fieldset>`).join('');
+$('#quiz').addEventListener('change',()=>{
+  const done=QUIZ.map((_,i)=>document.querySelector(`input[name=qz${i}]:checked`)).filter(Boolean);
+  if(done.length<QUIZ.length){$('#quizOut').textContent=`${done.length} of ${QUIZ.length} answered.`;return}
+  const lvl=Math.min(5,Math.max(1,Math.round(done.reduce((a,b)=>a+ +b.value,0)/QUIZ.length)));
+  $('#risk').value=lvl;$('#quizOut').textContent=`Your risk level: ${lvl} (${RISKL[lvl]}). The slider has been set for you.`;render();
+});
+
+/* ---------- home screen sketch ---------- */
+const WIRE={
+ headline:['The one number that makes people stop: how much an FD actually earned after inflation, or another surprising change in the data.','CBSL FD rates + CCPI inflation','Our own idea; the "insight before you type" rule from the competition brief'],
+ monitor:['Today\'s rates and prices in one panel, each with a "data as of" date and a small change arrow.','CBSL (T-bills, T-bonds, AWFDR, AWDR, CCPI, USD/LKR), bank FD pages, cse.lk (ASPI, S&P SL20), fund NAVs, gold if a permitted source exists','Bloomberg monitors (layout) + LankaBizz trackers (Sri Lankan content)'],
+ news:['Headlines with a link, the source, and our own positive / neutral / negative score.','Local news RSS, CSE announcements, CBSL press releases, a global feed','Bloomberg news panel + LankaBizz business news; the score is ours (LLM API or FinBERT)'],
+ changed:['Remembers the last visit in this browser and lists what moved since then. No sign-up, no emails.','Daily JSON snapshots in the repo','Bloomberg alerts, made simple'],
+ wrap:['A short summary of the week: index move, rate changes, the biggest news.','Our own collected data; FGE\'s monthly wrap-ups cited and linked','First Guardian Equities weekly and monthly market wraps'],
+ form:['Amount, the 5-question risk quiz, goal (growth / balanced / monthly income), "might you need it early?", horizon. Try it on tab 1.','Typed by the user, never stored on a server','Brokers\' client risk profiling'],
+ split:['How much goes into each option, in rupees and %, with a one-line reason for each.','Optimiser run on the forecasts','The gap none of the four sites fills'],
+ forecast:['Fan chart of the portfolio over time (bad / likely / good), chance of ending below what you put in, monthly income, and the same money in an FD after inflation.','Monte Carlo on forecast return and risk','Waraka-style portfolio forecast, drawn like TradingView\'s forecast charts'],
+ why:['Buttons like "Why this split?" that explain the plan from its real numbers.','The plan\'s own numbers','Replaces an AI chat like LankaBizz\'s or Bloomberg\'s ASKB; first thing we cut if short on time']};
+function showWire(k){
+  const [what,data,from]=WIRE[k];
+  document.querySelectorAll('#wire .wbox').forEach(b=>b.setAttribute('aria-pressed',b.dataset.p===k));
+  const name=document.querySelector(`#wire .wbox[data-p="${k}"] b`).textContent;
+  $('#wireDetail').innerHTML=`<h3 style="margin-bottom:10px">${name}</h3><div class="detail"><div><h4>What it shows</h4><p>${what}</p></div><div><h4>Data</h4><p>${data}</p></div><div><h4>Idea from</h4><p>${from}</p></div></div>`;
+}
+document.querySelectorAll('#wire .wbox').forEach(b=>b.addEventListener('click',()=>showWire(b.dataset.p)));
+showWire('forecast');
+
+/* ---------- pipeline ---------- */
+const STAGES=[
+ {id:1,lane:'Data layer',name:'Sources',what:['S&P SL20 prices, ASPI and CSE announcements from cse.lk','T-bill and T-bond yields, CCPI, AWFDR, AWDR, USD/LKR and policy rate from CBSL','FD and savings rates by bank','Daily unit trust NAVs','News: local sites, CBSL press releases, a little global (RSS)'],
+  why:'Data work is 30% of the marks. Judges look at where data comes from and whether we have the right to use it.',tools:['Browser DevTools','robots.txt and terms checks'],out:'docs/data_sources.md, one row per source',owner:'Analyst',bucket:'1',risk:'CSE price history may be short or missing.'},
+ {id:2,lane:'Data layer',name:'Collect',what:['Python scripts call each source once a day','Polite: 1 request per second, identified user-agent','On error: keep yesterday\'s file and log the failure'],
+  why:'Shows a live, current system (Best Data Vision) instead of a one-off download.',tools:['requests','GitHub Actions cron, 6:00pm weekdays'],out:'data/raw/<source>/<date>.json',owner:'Developer',bucket:'3',risk:'An undocumented API can change without notice.'},
+ {id:3,lane:'Data layer',name:'Store',what:['Raw pulls are committed to git exactly as received','Never edited by hand'],
+  why:'A full audit trail of what we knew and when. It also builds the sustained git history the judges score.',tools:['git','GitHub'],out:'Versioned raw files',owner:'Developer',bucket:'3',risk:'Repo size; fine at our scale (MBs).'},
+ {id:4,lane:'Data layer',name:'Clean, as-of dates',what:['Fix types and dates, remove duplicates','Mark holidays and no-trade days; don\'t silently fill them','Adjust prices for dividends, splits and rights issues','Store each value by the date it was published (no look-ahead)'],
+  why:'Removes the biases that make backtests lie: look-ahead, survivorship and stale prices.',tools:['pandas'],out:'data/clean/*.csv tidy tables',owner:'Developer',bucket:'3',risk:'Corporate actions may need manual data.'},
+ {id:5,lane:'Model layer',name:'Features',what:['5, 20 and 60-day returns and momentum','Rolling volatility','Real FD rate (FD rate minus inflation)','Yield-curve slope (bond minus bill)','News sentiment score per day (LLM API if we get a student plan, otherwise FinBERT)'],
+  why:'Turns raw tables into signals a model can learn from. Quants find momentum, liquidity and volatility the most useful.',tools:['pandas','LLM API or FinBERT'],out:'data/features.csv',owner:'Researcher',bucket:'4',risk:'Too many features invites overfitting.'},
+ {id:6,lane:'Model layer',name:'Forecast',what:['Return: time-series models (ARIMA, Prophet) per instrument vs a historical average (baseline)','Risk: rolling SD vs GARCH','Inflation and interest rates: ARIMA','T-bills, FDs, savings: known yield today; forecast only where the rate will reset'],
+  why:'This is the ML part. Risk forecasts usually work; return forecasts are hard, so we test them honestly.',tools:['statsmodels','Prophet','arch'],out:'Expected return + risk per instrument',owner:'Researcher',bucket:'4',risk:'ML may not beat the baseline. That is a valid finding.'},
+ {id:7,lane:'Model layer',name:'Beats baseline?',gate:true,what:['Walk-forward test: train on the past, test on the next period, roll forward','One final holdout, used once','Every trial logged in docs/experiments.md'],
+  why:'This is the "fail safely" behaviour judges score. Only proven forecasts reach the user; otherwise we use the baseline and flag weak data.',tools:['scikit-learn TimeSeriesSplit'],out:'Pass/fail per instrument + score vs baseline',owner:'Researcher',bucket:'4',risk:'Data snooping if we keep re-testing on the holdout.'},
+ {id:8,lane:'Decision layer',name:'Optimiser',what:['Mean-variance optimisation for each of 5 risk levels (set by the risk quiz)','Caps: max share in stocks by horizon, minimum in liquid assets','Goal (income, balanced, growth) and "need it early?" shift the constraints'],
+  why:'Turns forecasts into the split, which is the decision the user actually makes.',tools:['PyPortfolioOpt'],out:'Weights per risk level and horizon',owner:'Researcher',bucket:'5',risk:'Mean-variance swings wildly on noisy inputs, so we use caps and shrinkage.'},
+ {id:9,lane:'Decision layer',name:'Simulate',what:['Monte Carlo: 10,000 random paths using forecast return, risk and correlation','Bad / likely / good case for every year, drawn as a fan chart like TradingView\'s forecasts','Chance of loss, expected monthly income, comparison with an FD after inflation'],
+  why:'Produces D2\'s "range + chance of loss" instead of a single promised number.',tools:['numpy'],out:'Outcome range per split',owner:'Researcher',bucket:'5',risk:'Normal-distribution paths understate crashes, so we also bootstrap from history.'},
+ {id:10,lane:'Decision layer',name:'Dashboard',what:['Home: rates monitor, headline insight, news with sentiment, weekly wrap','Plan: amount, risk quiz, goal, liquidity, horizon → split + forecast','Pages: trackers, unit trust explorer, SL20 screener, outlook','"Data as of" on every number; warnings when data is stale or weak'],
+  why:'The demo is 20% of implementation marks and 35% of the final. It must work live on real data.',tools:['Next.js / React','Vercel'],out:'Public URL',owner:'Developer + Analyst',bucket:'6',risk:'Four extra pages on top of the core is a lot for two weeks.'}
+];
+const lanes=[...new Set(STAGES.map(s=>s.lane))];
+$('#lanes').innerHTML=lanes.map(l=>`<div class="lane"><div class="lname">${l}</div><div class="stages">${
+  STAGES.filter(s=>s.lane===l).map((s,i,a)=>`<button type="button" class="stage${s.gate?' gate':''}" data-id="${s.id}" aria-pressed="false"><span class="n">${String(s.id).padStart(2,'0')}</span>${s.name}</button>${i<a.length-1?'<span class="arrow" aria-hidden="true">→</span>':''}`).join('')}</div></div>`).join('');
+function showStage(id){
+  const s=STAGES.find(x=>x.id===id);
+  document.querySelectorAll('.stage').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.id===id));
+  $('#stageDetail').innerHTML=`<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;margin-bottom:14px"><h3>${String(s.id).padStart(2,'0')} · ${s.name}</h3><span class="chip teal">Bucket ${s.bucket}</span><span class="chip">${s.owner}</span></div>
+  <div class="detail">
+   <div><h4>What happens</h4><ul>${s.what.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+   <div><h4>Why it matters</h4><p>${s.why}</p></div>
+   <div><h4>Tools</h4><div>${s.tools.map(t=>`<span class="chip">${t}</span>`).join('')}</div><h4 style="margin-top:12px">Output</h4><p class="mono">${s.out}</p></div>
+   <div><h4>Watch out for</h4><p>${s.risk}</p></div>
+  </div>`;
+}
+document.querySelectorAll('.stage').forEach(b=>b.addEventListener('click',()=>showStage(+b.dataset.id)));
+showStage(1);
+
+let running=false;
+$('#runDay').addEventListener('click',async()=>{
+  if(running)return;running=true;
+  const fail=$('#failSrc').checked, weak=$('#weakModel').checked, log=$('#log');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, wait=ms=>new Promise(r=>setTimeout(r,reduce?0:ms));
+  log.innerHTML='';
+  const say=(t,html,cls)=>{log.innerHTML+=`<span class="t">${t}</span>  <span class="${cls||''}">${html}</span>\n`;log.scrollTop=log.scrollHeight};
+  const steps=[
+   [1,'18:00','GitHub Actions wakes up (weekday schedule)'],
+   [2,'18:00',fail?'cse.lk: no response after 3 tries. Keeping yesterday\'s file, marked stale':'cse.lk: 20 S&P SL20 prices + ASPI · CBSL: USD/LKR, no new auction today · 7 unit trust NAVs · 34 headlines + 2 CBSL releases'],
+   [3,'18:02','Raw files committed: "data: daily refresh"'],
+   [4,'18:03',fail?'Clean tables rebuilt; share prices flagged as 1 day stale':'Clean tables rebuilt; 1 dividend adjustment applied'],
+   [5,'18:04','Features updated; 36 headlines scored for sentiment'],
+   [6,'18:06','Forecasts rebuilt for 7 instruments'],
+   [7,'18:07',weak?'Share return model lost to the historical average this month. Using baseline, "weak data" flag ON':'GARCH risk model beats rolling SD; ARIMA return model beats baseline on holdout. Using the models'],
+   [8,'18:08','Optimiser: splits recomputed for 5 risk levels × 3 goals × 2 liquidity choices × 3 horizons'],
+   [9,'18:09','10,000 Monte Carlo paths per split; fan chart, chance of loss and monthly income saved as JSON'],
+   [10,'18:10','Push → Vercel rebuilds. Site shows "data as of '+(fail?'14 Oct for shares, 15 Oct for the rest':'15 Oct')+'"']];
+  for(const [id,t,msg] of steps){
+    document.querySelectorAll('.stage').forEach(b=>b.classList.toggle('lit',+b.dataset.id===id));
+    showStage(id);
+    const warn=(fail&&(id===2||id===4||id===10))||(weak&&id===7);
+    say(t,msg,warn?'w':'');
+    await wait(900);
+  }
+  document.querySelectorAll('.stage').forEach(b=>b.classList.remove('lit'));
+  say('done','User opens the site and gets a split, a range and a chance of loss'+(fail||weak?', with a visible warning.':'.'));
+  running=false;
+});
+
+/* ---------- broker questions ---------- */
+const QS={
+ 'Check our data sources':[
+  'Where do brokers get historical daily CSE prices? Is there a licensed or free feed students can use?',
+  'Is it acceptable to read cse.lk\'s public site data for a non-commercial student project?',
+  'How should we adjust share prices for dividends, splits and rights issues? Is there a source for corporate actions?',
+  'Best source for unit trust NAV history? Do fund managers share it on request?',
+  'Is there usable price or yield data for listed debentures, and for LKR gold?'],
+ 'Sanity-check the allocation logic':[
+  'Do five risk levels make sense to you? How do you profile a new client\'s risk?',
+  'What is a sensible maximum in shares for a 1-year vs a 5-year horizon?',
+  'Which S&P SL20 stocks are too illiquid for a small investor to buy and sell easily?',
+  'What risks do beginners miss (liquidity, early FD withdrawal, bond price falls when rates rise)?',
+  'Would you trust a range plus a chance of loss more than a single expected return?'],
+ 'Validate the user problem':[
+  'What do first-time investors ask you most?',
+  'Why do most people stay in FDs and savings accounts?',
+  'What is a typical starting amount for a first-time investor?',
+  'Who is under-served today: young salaried workers, retirees, migrant workers sending money home?'],
+ 'Risk quiz and inputs':[
+  'Which 5 or 6 questions do you ask a new client to judge their risk?',
+  'Is "goal (growth or monthly income)" plus "might you need the money early?" enough, or what else do you ask?',
+  'What dividend yield and FD/T-bill income is realistic to show as "expected monthly income"?'],
+ 'News and market context':[
+  'Which local news sources do brokers actually read and trust?',
+  'Which kinds of news really move the CSE (policy rate, IMF reviews, budget, company results)?',
+  'Could we cite your weekly and monthly market wraps on our outlook page? Is there a text or data version of the weekly update?'],
+ 'How we compare':[
+  'Have you seen LankaBizz or Waraka.lk? What do clients like or miss in them?',
+  'Would you show a tool like ours to a first-time client? What would stop you?'],
+ 'Compliance and "not advice" wording':[
+  'Under SEC Sri Lanka rules, what makes a tool "investment advice"?',
+  'Can we name individual shares in a suggested split, or should we stay at asset-class level?',
+  'What disclaimer wording do brokers use?']};
+let ticked={};try{ticked=JSON.parse(localStorage.getItem('mx-q')||'{}')}catch(e){}
+$('#qs').innerHTML=Object.entries(QS).map(([g,qs],gi)=>`<div class="card qgroup"><h3>${g}</h3>${qs.map((q,i)=>{const id=`q${gi}-${i}`;return `<label class="q${ticked[id]?' done':''}" for="${id}"><input type="checkbox" id="${id}" ${ticked[id]?'checked':''}><span>${q}</span></label>`}).join('')}</div>`).join('');
+document.querySelectorAll('#qs input').forEach(cb=>cb.addEventListener('change',()=>{ticked[cb.id]=cb.checked;cb.parentElement.classList.toggle('done',cb.checked);try{localStorage.setItem('mx-q',JSON.stringify(ticked))}catch(e){}}));
+})();
+</script>
+
+</body></html>

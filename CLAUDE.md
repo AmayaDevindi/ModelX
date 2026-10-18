@@ -19,12 +19,14 @@ Core decision it drives: "How should I split my money right now, given my risk a
 
 ## Agreed decisions – do not drift from these without asking
 See docs/decisions.md. Short version:
-- Instruments: S&P SL20 stocks, unit trusts, T-bills, T-bonds, FDs
+- Instruments: savings, FDs, T-bills, T-bonds, unit trusts, S&P SL20 stocks (D8)
+- Three models: customer identification, fundamental analysis, news chain (D26, D31–D33)
+- Sri Lankan official/authorised data sources only (D35)
 - Never promise profit. Show ranges + probability of loss.
 - Daily refresh, every number shows "data as of" date
 - ML forecasts return + risk -> optimiser builds the split -> always compared to a simple baseline
 - Data collected by a scheduled script (GitHub Actions), not an AI agent
-- News is extra context only; we score it ourselves, we don't copy another site's predictions
+- News feeds the outlook via a factor → sector → company chain (D33); we score it ourselves, we don't copy another site's predictions
 
 ## How the judges score (keep this in mind for every choice)
 Implementation: data work 30%, insight 25%, engineering 25%, demo 20%.
