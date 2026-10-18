@@ -27,7 +27,7 @@ def is_grey(p):
 t0 = d.tables[0]
 c = t0.cell(0, 1)
 c.paragraphs[0].text = ''
-r = c.paragraphs[0].add_run('[TEAM NAME]'); r.font.highlight_color = WD_COLOR_INDEX.YELLOW
+r = c.paragraphs[0].add_run('Fushiguro')
 dom = d.tables[1].cell(0, 0)
 for p in dom.paragraphs:
     for rr in p.runs:
