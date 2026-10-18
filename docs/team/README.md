@@ -1,0 +1,1 @@
+Team photos for the proposal's team cards. Name them member1.jpg, member2.jpg, member3.jpg (Member 1 = Chanula, 2 = Amaya, 3 = Thisara), then rebuild the proposal with build_docx.py. Square photos work best.

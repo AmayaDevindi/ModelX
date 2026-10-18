@@ -173,7 +173,12 @@ for idx, cell in enumerate(cells):
             for rr in p.runs: rr.text = ''
             if idx < len(TEAM):
                 if t == 'photo':
-                    r = p.add_run('[photo]'); r.font.highlight_color = WD_COLOR_INDEX.YELLOW
+                    import os
+                    ph = os.path.join(os.path.dirname(os.path.abspath(MD)), '..', 'team', f'member{idx+1}.jpg')
+                    if os.path.exists(ph):
+                        p.add_run().add_picture(ph, width=Cm(3))
+                    else:
+                        r = p.add_run('[photo]'); r.font.highlight_color = WD_COLOR_INDEX.YELLOW
                 else:
                     r = p.add_run(TEAM[idx][t]); r.bold = (t == 'name') or None
 d.save(OUT)
