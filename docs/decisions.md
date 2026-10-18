@@ -43,6 +43,9 @@ Mirror of `docs/decisions.md` in the repo – the repo copy wins. New decisions 
 | **D36** | 18 Oct: **UI mimics the Bloomberg Terminal** (from the reel): dense panels, ticker strip, command bar ("JKH", "FD", "PLAN"). Light theme kept (D9). Charts with TradingView Lightweight Charts. Hosted on Vercel | Design reference |
 | **D37** | 18 Oct: **Roles** – Member 1: data collection + pipeline, helps with the website. Member 2 (Amaya): ML and the three models. Member 3: UI/UX design + website | Team decision |
 
+| **D38** | 18 Oct: **Terminal-style tabs and fixed risk measures**, inspired by a public "mini financial terminal" build prompt: tabs MKTS, QUOTE, FA, RISK, NEWS, ECO, PLAN; command bar ("JKH FA"); every panel shows source + last updated; "data unavailable" instead of fake numbers; risk = log returns, annualised vol, Sharpe (risk-free = CBSL 364-day T-bill), beta vs ASPI, max drawdown, correlation heatmap over 252 days; unit tests for every metric | Clear structure; matches "fail safely" in the booklet |
+| **D39** | 18 Oct: Team name **Fushiguro**. The expert is described as "a former stockbroker we consulted" (not named) | Team decision |
+
 ## Still open
 - CSE gives only ~1 year of daily prices (checked 16 Oct) – archive daily from now; longer series from CBSL
 - Written confirmation of CSE terms for its data endpoints – email CSE
