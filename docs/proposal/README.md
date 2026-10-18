@@ -1,6 +1,9 @@
-# Proposal drafts
+# Proposal (Submission 1, due Mon 19 Oct 2026)
 
-One file per template section (01-problem.md ... 12-team.md). Draft here, review,
-then the final text goes into docs/templates/ModelX-2.0-Proposal-Template.docx.
+- `proposal.md` – the text, one section per template heading. Edit this, not the .docx.
+- `ModelX-Proposal.docx` – built from `proposal.md` into the official template (`../templates/`).
+- `build_docx.py` – rebuilds the .docx: `python build_docx.py ../templates/ModelX-2.0-Proposal-Template.docx proposal.md ModelX-Proposal.docx`
+- Screenshots used in section 5 are in `../evidence/`.
 
-Rules: no invented numbers – mark gaps as [NEED: ...]. Keep the template's section order.
+Still to fill before submitting (yellow in the .docx): team name, team cards (name, email, university, photo).
+Rules: no invented numbers; keep the template's section order.
