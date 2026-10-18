@@ -159,15 +159,22 @@ for p, k in heads:
         render(Cursor(p._p), sections[k], is_refs=(k == '11'))
 
 # ---------- team cards ----------
+TEAM = [
+    {'name': 'Chanula Ramanayaka', 'email': 'unichanula@gmail.com', 'university': 'University of Moratuwa'},
+    {'name': 'Amaya Devindi Walikatiyage', 'email': 'amayadevindiuni@gmail.com', 'university': 'University of Moratuwa'},
+    {'name': 'Thisara Dewdunu Rajapaksha', 'email': 'thisaradewdunu174@gmail.com', 'university': 'University of Moratuwa'},
+]
 tt = d.tables[-1]
 cells = [tt.cell(0, 0), tt.cell(0, 1), tt.cell(1, 0), tt.cell(1, 1)]
-labels = {'photo': '[photo]', 'name': '[Full name]', 'email': '[Email]', 'university': '[University]'}
 for idx, cell in enumerate(cells):
     for p in cell.paragraphs:
         t = p.text.strip().lower()
-        if t in labels:
+        if t in ('photo', 'name', 'email', 'university'):
             for rr in p.runs: rr.text = ''
-            if idx < 3:
-                r = p.add_run(labels[t]); r.font.highlight_color = WD_COLOR_INDEX.YELLOW
+            if idx < len(TEAM):
+                if t == 'photo':
+                    r = p.add_run('[photo]'); r.font.highlight_color = WD_COLOR_INDEX.YELLOW
+                else:
+                    r = p.add_run(TEAM[idx][t]); r.bold = (t == 'name') or None
 d.save(OUT)
 print('saved', OUT, 'sections', sorted(sections), 'heads', [k for _, k in heads])

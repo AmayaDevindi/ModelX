@@ -46,6 +46,9 @@ Mirror of `docs/decisions.md` in the repo – the repo copy wins. New decisions 
 | **D38** | 18 Oct: **Terminal-style tabs and fixed risk measures**, inspired by a public "mini financial terminal" build prompt: tabs MKTS, QUOTE, FA, RISK, NEWS, ECO, PLAN; command bar ("JKH FA"); every panel shows source + last updated; "data unavailable" instead of fake numbers; risk = log returns, annualised vol, Sharpe (risk-free = CBSL 364-day T-bill), beta vs ASPI, max drawdown, correlation heatmap over 252 days; unit tests for every metric | Clear structure; matches "fail safely" in the booklet |
 | **D39** | 18 Oct: Team name **Fushiguro**. The expert is described as "a former stockbroker we consulted" (not named) | Team decision |
 
+| **D40** | 18 Oct: **Dark terminal theme by default** (dark background, amber text, green/red for gains/losses) **with a light-theme switch**. Replaces the light-only choice in D9/D36 | Matches the terminal look; light option for beginners |
+| **D41** | 18 Oct: Members – 1 Chanula Ramanayaka (data), 2 Amaya Devindi Walikatiyage (ML, models), 3 Thisara Dewdunu Rajapaksha (UI/UX, website) | Team decision |
+
 ## Still open
 - CSE gives only ~1 year of daily prices (checked 16 Oct) – archive daily from now; longer series from CBSL
 - Written confirmation of CSE terms for its data endpoints – email CSE

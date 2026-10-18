@@ -208,7 +208,7 @@ We will test how far news actually moved prices using an event study [36]: the s
 
 ## 7.3 Interface and interaction
 
-Laptop first. The layout mimics the Bloomberg Terminal [32]: many small, data-dense panels on one screen, a scrolling ticker strip across the top, and a command bar where the user can type a code to jump straight to a view (for example "JKH" for a company page, "FD" for deposit rates, "PLAN" for their split). We keep a light, clean colour scheme and plain labels so beginners are not put off; experienced users can open more detail on click.
+Laptop first. The layout mimics the Bloomberg Terminal [32]: many small, data-dense panels on one screen, a scrolling ticker strip across the top, and a command bar where the user can type a code to jump straight to a view (for example "JKH" for a company page, "FD" for deposit rates, "PLAN" for their split). It opens in a dark terminal theme (dark background, amber text, green for gains and red for losses), with a one-click switch to a light theme for users who find that easier to read. Labels stay plain so beginners are not put off, and experienced users can open more detail on click.
 
 - **Function tabs, like a terminal:** MKTS (market overview and rates), QUOTE (company price chart with 1M/6M/1Y ranges and moving averages), FA (financial statements and health grade), RISK (the risk measures in section 6 and a correlation heatmap), NEWS (headlines with sentiment and their chain of effects), ECO (inflation, rates, rupee, T-bill yield curve) and PLAN (the user's split). Typing "JKH FA" in the command bar opens John Keells' fundamentals.
 - **Every panel shows its source and a "last updated" time.** If a source fails, the panel says "data unavailable" with the reason. It never shows made-up or placeholder numbers.
@@ -234,7 +234,7 @@ Laptop first. The layout mimics the Bloomberg Terminal [32]: many small, data-de
 | 29–31 Oct | Evaluation and fixes | All |
 | 31 Oct – 1 Nov | Technical report, two-page summary, 3-minute video, public repo with README | All |
 
-**Roles.** Member 1 owns data collection and the data pipeline. Member 2 owns machine learning and the three models. Member 3 owns UI/UX design and the website, which Member 1 helps build once the pipeline is running.
+**Roles.** Member 1 (Chanula Ramanayaka) owns data collection and the data pipeline. Member 2 (Amaya Devindi Walikatiyage) owns machine learning and the three models. Member 3 (Thisara Dewdunu Rajapaksha) owns UI/UX design and the website, which Member 1 helps build once the pipeline is running.
 
 **What "finished" looks like on 1 November:** the daily pipeline runs on its own; a user can sign in, answer the questionnaire and get a personal split with a range, a chance of loss and the FD comparison on real, dated data; every S&P SL20 company has a health grade; the news panel shows chains of effects; and each model's result against its baseline is reported honestly.
 
