@@ -29,3 +29,14 @@ today's value, it can still be used live, but we need another source for history
 - **CBSL Data Library**: reachable. Monthly series available: CCPI(2021=100) headline/core, AWFDR, AWNFDR, LCB 1-yr FD rates min/max, LCB savings rates min/max, NSB FD and savings rates; Treasury Bills / Treasury Bonds / Share Market Data subjects exist. Web form only (no API) – export CSV.
 - **Unit trusts**: use UTASL (utasl.lk/unit-prices), not Waraka. Daily buying/selling prices for ~65–80 funds, latest 15 Oct 2026; site history from Jan 2026 (fewer funds then). Data via WordPress AJAX `filter_financial_data` (post_type=unit_price, date=YYYY-MM-DD). robots.txt allows all.
 - **News**: EconomyNext RSS https://economynext.com/feed/ works (20 items, latest 17 Oct 2026); robots.txt blocks only /wp-admin/.
+
+## Script results – cse_pull.py run by Amaya on her laptop, 3 Nov 2026
+- First real run of the script (data/raw/cse/ was empty before). All five requests worked; files saved with date 2026-11-03.
+- S&P SL20 index 5,722.57 on 3 Nov (day range 5,697.55 – 5,736.53). Constituents list has 23 securities (20 companies plus non-voting shares).
+- JKH daily history: 243 rows, 4 Nov 2025 to 3 Nov 2026 (about 1 year, as found on 16 Oct). Fields h, l, p, q, s, t, id are filled; o, c, pc, n are empty in every row.
+- Timestamps (t) are milliseconds since 1970, set to midnight Sri Lanka time. Field meanings (h=high, l=low, p=price/close, q=volume) are our reading and still to be checked against cse.lk.
+- 3 Nov, cse_history_all.py: history saved for all 23 securities. 21 have 243 daily rows (4 Nov 2025 to 3 Nov 2026); ACL has 238 and NDB 242 (days with no trade have no row).
+- 3 Nov, clean_cse_prices.py: combined into data/clean/cse_prices.csv (243 days x 23 securities). Gaps filled by carrying the last price forward (5 days for ACL, 1 for NDB). Data as of 2026-11-03.
+- To check: ACL's price falls by about two thirds on 2025-12-29 (log return -1.11, price ratio about 0.33); looks like a share split not adjusted in the prices. NDB falls 15% on 2026-04-07. Check both against CSE announcements before using them.
+- 3 Nov, check_jumps.py: flags any one-day move over 15%. ACL on 2025-12-29 (price ratio 0.329, volume about 16x) treated as a 3-for-1 split and earlier prices divided by 3 (still to confirm against the CSE announcement). NDB on 2026-04-07 (ratio 0.849, volume about 5x) flagged only, not adjusted. Output: data/clean/cse_prices_adjusted.csv and data/clean/adjustments_log.csv.
+- 3 Nov, check_jumps.py updated to the per-stock yardstick method (decision D44). Replaces the fixed 15% limit described above; ACL and NDB are still the two clearest cases.

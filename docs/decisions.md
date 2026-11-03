@@ -49,6 +49,11 @@ Mirror of `docs/decisions.md` in the repo – the repo copy wins. New decisions 
 | **D40** | 18 Oct: **Dark terminal theme by default** (dark background, amber text, green/red for gains/losses) **with a light-theme switch**. Replaces the light-only choice in D9/D36 | Matches the terminal look; light option for beginners |
 | **D41** | 18 Oct: Members – 1 Chanula Ramanayaka (data), 2 Amaya Devindi Walikatiyage (ML, models), 3 Thisara Dewdunu Rajapaksha (UI/UX, website) | Team decision |
 
+| **D42** | 3 Nov: **Implementation deadline moved to Thu 5 Nov 2026** (was Sun 1 Nov). Final pitch still Sat 14 Nov (confirm). Only the proposal has been submitted so far | Organisers' change |
+| **D43** | 3 Nov (Amaya, with Claude): **Scope for 5 Nov.** Build: data pipeline with real data, Model 1 (quiz, split, Monte Carlo, FD-after-inflation), baseline-vs-ARIMA check on one or two series, dashboard + plan page; Model 2 for ~3 companies only if time allows. Cut for now: login, extra pages, FinBERT, news chain model, company pages. The report lists what was designed but not built. Team to confirm | 2 days left; the report must match the code |
+
+| **D44** | 3 Nov: **Price anomaly check uses a per-stock yardstick, not a fixed %.** Remove the market's move that day (median of all stocks), compare each stock's leftover with its own normal size over the last 60 days (MAD), flag above 8x that size; plain 15% limit only where there is no history yet. Clear splits (price ratio near 1/2-1/10 and volume up) are adjusted automatically; everything else is flagged and logged, never silently changed. 8x chosen from the year of data we have (10 flags at 8x, 43 at 5x) | A fixed % can not adapt as data updates; stops market-wide days being flagged; keeps real shocks in the data |
+
 ## Still open
 - CSE gives only ~1 year of daily prices (checked 16 Oct) – archive daily from now; longer series from CBSL
 - Written confirmation of CSE terms for its data endpoints – email CSE

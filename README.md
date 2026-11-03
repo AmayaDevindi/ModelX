@@ -17,7 +17,7 @@ Three models feed one personal plan (details in `docs/decisions.md`, D26–D37):
 Data comes only from Sri Lankan official or authorised sources (CBSL, CSE, Department of Census and Statistics, UTASL, local news).
 
 ## Status
-See `docs/planning/status.md`. Proposal due Mon 19 Oct; implementation due Sun 1 Nov.
+See `docs/planning/status.md`. Proposal submitted. Implementation due Thu 5 Nov (moved from Sun 1 Nov).
 
 ## Folder layout
 
