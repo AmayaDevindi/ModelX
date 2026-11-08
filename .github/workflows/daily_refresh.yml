@@ -1,5 +1,4 @@
-# Daily data refresh - switched OFF until Bucket 3.
-# To turn on: delete the "if: false" line below and push.
+# Daily data refresh - switched ON 8 Nov 2026.
 name: daily-refresh
 
 on:
@@ -9,7 +8,6 @@ on:
 
 jobs:
   refresh:
-    if: false
     runs-on: ubuntu-latest
     permissions:
       contents: write
