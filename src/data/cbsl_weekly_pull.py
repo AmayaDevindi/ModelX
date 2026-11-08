@@ -41,10 +41,13 @@ TBOND_LINE = re.compile(
 
 
 def find_latest_pdf():
-    html = requests.get(PAGE, headers=HEADERS, timeout=30).text
+    resp = requests.get(PAGE, headers=HEADERS, timeout=30)
+    html = resp.text
     found = re.findall(r'href="([^"]*WEI_(\d{8})_e\.pdf)"', html)
     if not found:
-        raise RuntimeError("Could not find a weekly PDF link on the CBSL page")
+        raise RuntimeError("Could not find a weekly PDF link on the CBSL page. "
+                           f"Status {resp.status_code}, {len(html)} characters, starts: "
+                           f"{html[:200]!r}")
     url, stamp = max(found, key=lambda x: x[1])
     if url.startswith("/"):
         url = "https://www.cbsl.gov.lk" + url

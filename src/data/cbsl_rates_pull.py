@@ -55,10 +55,13 @@ RANGE_COLUMNS = {"fd_12m", "savings"}    # these are printed as "low-high" in re
 
 
 def find_latest_link():
-    html = requests.get(PAGE, headers=HEADERS, timeout=30).text
+    resp = requests.get(PAGE, headers=HEADERS, timeout=30)
+    html = resp.text
     found = re.findall(r'href="([^"]*table4\.04_(\d{8})\.xlsx)"', html)
     if not found:
-        raise RuntimeError("Could not find the table 4.04 link on the CBSL page")
+        raise RuntimeError("Could not find the table 4.04 link on the CBSL page. "
+                           f"Status {resp.status_code}, {len(html)} characters, starts: "
+                           f"{html[:200]!r}")
     url, stamp = max(found, key=lambda x: x[1])
     if url.startswith("/"):
         url = "https://www.cbsl.gov.lk" + url
