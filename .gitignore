@@ -7,3 +7,6 @@ __pycache__/
 # Office temp/lock files
 ~$*
 *.tmp
+
+# local refresh log
+refresh_log.txt
