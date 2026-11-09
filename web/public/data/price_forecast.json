@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T06:48:59.653704+00:00",
+  "generated_at": "2026-11-09T07:35:29.368885+00:00",
   "note": "Simplified ARIMA-style forecast (AR fitted on first-differenced log price, no moving-average term), hand-written in NumPy, validated against a naive no-change baseline on a holdout. Covers 2 stocks only. See README and docs/decisions.md D53.",
   "companies": [
     {
