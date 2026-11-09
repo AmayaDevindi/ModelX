@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T00:53:21.847807+00:00",
+  "generated_at": "2026-11-09T05:07:21.351801+00:00",
   "equity_premium": 5.0,
   "inflation": 8.3,
   "inflation_month": "2026-10",
@@ -39,9 +39,9 @@
     {
       "name": "Shares (S&P SL20)",
       "mean": 14.91,
-      "sd": 17.11182917412004,
-      "low": -2.2018291741200393,
-      "high": 32.02182917412004,
+      "sd": 17.11182917412007,
+      "low": -2.2018291741200713,
+      "high": 32.02182917412007,
       "note": "21 CSE stocks, 242 days: yearly risk 17.1%. Average return = today's 12-month T-bill (9.91%) + our 5.0% premium (D47). For reference, actual return over the last 242 days was -5.6% - too short and too unusual a period to use directly."
     }
   ]
