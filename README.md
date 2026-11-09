@@ -22,10 +22,31 @@ website:
 3. Every number traces back to a real source — CBSL rates, CBSL bill yields,
    UTASL fund performance, CSE prices — shown on request ("why these numbers?").
 
-**Proposed, not built in this submission** (see `docs/decisions.md` for the scope
-decision): fundamental-analysis grading per company, and the news-headline chain
-reaction model. Cut to keep the submitted scope realistic and fully working end
-to end, per the team's own decision on 3 Nov.
+**Model 2 – company health clustering (reduced scope)**: groups all 23 S&P SL20
+securities with k-means clustering (written by hand in plain NumPy, not a
+library, so it also runs on a locked-down machine where scikit-learn's compiled
+files get blocked) using five real, live features per company — price
+volatility, beta against the market, board independence, whether the auditor is
+a Big 4 firm, and where the price sits in its 12-month range. This is NOT the
+full fundamental-analysis scoring the proposal describes (profitability,
+earnings growth, debt ratios from annual report PDFs) — that needs real PDF
+extraction work the team didn't have time for in this submission. Every
+company's group assignment comes with a plain-words reason (e.g. "board
+independence is above average"). Script: `src/model/health_cluster.py`, data
+pull: `src/data/cse_company_profile_pull.py`.
+
+**Model 3 – news chain reaction (reduced scope)**: tags each pulled headline
+with an economic factor (oil, interest rates, the rupee, inflation, tourism,
+tax) and a direction, then follows a fixed, written-down table of which sectors
+that typically helps or hurts and why. This is the team's own common-knowledge
+reasoning — NOT verified by a licensed adviser, and NOT yet tested against how
+prices actually moved (that would need an event study, which needs more price
+history than the one year the CSE currently gives). No LLM or FinBERT used —
+plain keyword rules, per the team's own documented fallback. Script:
+`src/model/news_chain.py`.
+
+Both Model 2 and Model 3 run automatically as part of the daily pipeline
+(`run_pipeline.py`) and write their output to `data/clean/`.
 
 Data comes only from Sri Lankan official or authorised sources (CBSL, CSE, UTASL,
 local news).
@@ -47,7 +68,8 @@ docs/
   data_sources.md  every data source: URL, method, history, terms
   ai_use_log.md  AI use, as the rules require
 src/data/        scripts that pull and clean each data source
-src/model/       the three pieces of Model 1 (assumptions, profile/quiz, simulation)
+src/model/       Model 1 (assumptions, profile/quiz, simulation), Model 2
+                (health_cluster.py), Model 3 (news_chain.py)
 web/             the Next.js website (the PLAN page runs Model 1 in the browser)
 data/raw/        raw pulls, one file per source per day
 data/clean/      cleaned data the model reads
