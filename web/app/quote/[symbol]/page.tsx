@@ -6,6 +6,7 @@ import Link from "next/link";
 import Shell from "@/components/Shell";
 import PriceChart from "@/components/PriceChart";
 import TradingViewWidget from "@/components/TradingViewWidget";
+import ForecastPanel from "@/components/ForecastPanel";
 
 interface Company {
   symbol: string;
@@ -22,6 +23,15 @@ interface ClusterInfo {
   why: string;
 }
 
+interface ForecastCompany {
+  symbol: string;
+  ar_order: number;
+  backtest: { holdout_days: number; ar_rmse: number; naive_rmse: number; winner: string };
+  last_price: number;
+  last_date: string;
+  forecast: { date: string; price: number; low: number; high: number }[];
+}
+
 function QuoteDetailContent() {
   const params = useParams<{ symbol: string }>();
   const symbol = decodeURIComponent(params.symbol);
@@ -29,6 +39,7 @@ function QuoteDetailContent() {
   const [company, setCompany] = useState<Company | null>(null);
   const [history, setHistory] = useState<{ date: string; price: number }[] | null>(null);
   const [cluster, setCluster] = useState<ClusterInfo | null>(null);
+  const [forecast, setForecast] = useState<ForecastCompany | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -36,13 +47,16 @@ function QuoteDetailContent() {
       fetch("/data/companies.json").then((r) => r.json()),
       fetch("/data/price_history.json").then((r) => r.json()),
       fetch("/data/company_clusters.json").then((r) => (r.ok ? r.json() : { companies: [] })),
+      fetch("/data/price_forecast.json").then((r) => (r.ok ? r.json() : { companies: [] })),
     ])
-      .then(([companiesData, historyData, clusterData]) => {
+      .then(([companiesData, historyData, clusterData, forecastData]) => {
         const c = companiesData.companies.find((x: Company) => x.symbol === symbol);
         setCompany(c ?? null);
         setHistory(historyData.history[symbol] ?? []);
         const cl = (clusterData.companies ?? []).find((x: ClusterInfo) => x.symbol === symbol);
         setCluster(cl ?? null);
+        const fc = (forecastData.companies ?? []).find((x: ForecastCompany) => x.symbol === symbol);
+        setForecast(fc ?? null);
       })
       .catch((e: Error) => setError(e.message));
   }, [symbol]);
@@ -104,6 +118,8 @@ function QuoteDetailContent() {
                 <p className="text-xs text-muted leading-relaxed">{cluster.why}</p>
               </div>
             )}
+
+            {forecast && <ForecastPanel data={forecast} />}
           </>
         )}
       </div>

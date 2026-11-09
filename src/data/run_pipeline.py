@@ -30,6 +30,7 @@ STEPS = [
     ("Find and fix price anomalies", "src/data/check_jumps.py",           True),
     ("Make model inputs + quality",  "src/data/make_model_inputs.py",     True),
     ("Group companies by risk profile (Model 2)", "src/model/health_cluster.py", False),
+    ("Forecast baseline + AR check, 2 stocks (Model 4)", "src/model/price_forecast.py", False),
     ("Export model numbers for the website", "src/data/export_model_json.py", True),
     ("Export Model 2/3 for the website", "src/data/export_model2_3_json.py", False),
     ("Export company list + price history for QUOTE pages", "src/data/export_price_history_json.py", True),

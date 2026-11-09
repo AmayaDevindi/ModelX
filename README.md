@@ -52,8 +52,27 @@ the website: the **FA** tab for Model 2, the **NEWS** tab for Model 3.
 **QUOTE tab**: one page per S&P SL20 company with its live TradingView chart
 (CSE has an official TradingView data partnership, so the same symbols we use
 elsewhere work directly - e.g. `CSELK:JKH.N0000`), our own pulled price history
-alongside it for transparency on what feeds Model 1/2, and that company's
-Model 2 group with its reasoning.
+alongside it for transparency on what feeds Model 1/2, that company's Model 2
+group with its reasoning, and (for 2 stocks) Model 4's forecast.
+
+**Model 4 - forecast baseline + AR check (added 9 Nov, reduced scope)**: this
+is the "baseline-vs-ARIMA check" that was in the original plan, cut when the
+deadline first moved, and finished once the deadline was confirmed as 10 Nov.
+For 2 liquid blue-chips (`JKH.N0000`, `COMB.N0000`), fits a simplified
+ARIMA(p, 1, 0) - an autoregressive model on the first-differenced log price,
+with NO moving-average term - written by hand in plain NumPy rather than
+statsmodels (which ships even more compiled Cython extensions than
+scikit-learn, already blocked once today by Device Guard - same tradeoff as
+Model 2). Order p chosen by BIC on training data only, so the backtest number
+isn't picked to look good. Backtested on a 30-day holdout against a naive
+"no change" baseline - on both stocks, the AR model genuinely beat the
+baseline, honestly reported either way. Also produces a forward 30-day
+projection with a widening confidence band, shown on the QUOTE page for
+those 2 stocks. Script: `src/model/price_forecast.py`. This is NOT a full
+statsmodels ARIMA (no MA term, no formal stationarity tests), covers only 2
+of 23 companies, and is checked on ~240 days of price history - treat it as
+an honestly-validated simple baseline, not a trading signal. See
+docs/decisions.md D53.
 
 Data comes only from Sri Lankan official or authorised sources (CBSL, CSE, UTASL,
 local news).
