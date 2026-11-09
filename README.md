@@ -1,23 +1,37 @@
 # ModelX 2.0 – Sri Lanka Investment Guide (working name)
 
 A tool that helps Sri Lankans who want to invest but don't know where to start.
-The investor enters their amount, risk appetite, strategy and time horizon, and the
-tool shows how they could split the money across FDs, T-bills/bonds, unit trusts and
-S&P SL20 stocks — with a likely return range, chance of loss, and how it compares to
-just keeping it in an FD after inflation.
+The investor answers a short quiz, and the tool shows how they could split their
+money across savings, FDs, T-bills/bonds, unit trusts and S&P SL20 stocks — with a
+likely return range, chance of loss, and how it compares to just keeping it in an
+FD after inflation.
 
 Educational only. Not financial advice.
 
-## What it does
-Three models feed one personal plan (details in `docs/decisions.md`, D26–D37):
-1. **Customer identification** – risk questionnaire → risk band → instruments the user picks → age-based split.
-2. **Fundamental analysis** – A–E health grade for each S&P SL20 company from its CSE annual and quarterly reports.
-3. **News chain reaction** – headline → economic factor → sector → company, combined with the grade into an outlook.
+## What's built (this submission)
 
-Data comes only from Sri Lankan official or authorised sources (CBSL, CSE, Department of Census and Statistics, UTASL, local news).
+**Model 1 – risk profile → recommended split → outcome simulation**, live on the
+website:
+1. A short quiz (grounded in the CFA Institute's investment risk-profiling
+   guidance) works out a risk profile, separately checks real investment
+   knowledge, and caps how much goes into shares if that knowledge is low.
+2. A Monte Carlo simulation (10,000 simulated years) turns that split into a
+   likely / bad-case / good-case outcome range, a chance of ending up with less
+   than you put in, and a side-by-side comparison against putting it all in a
+   fixed deposit.
+3. Every number traces back to a real source — CBSL rates, CBSL bill yields,
+   UTASL fund performance, CSE prices — shown on request ("why these numbers?").
+
+**Proposed, not built in this submission** (see `docs/decisions.md` for the scope
+decision): fundamental-analysis grading per company, and the news-headline chain
+reaction model. Cut to keep the submitted scope realistic and fully working end
+to end, per the team's own decision on 3 Nov.
+
+Data comes only from Sri Lankan official or authorised sources (CBSL, CSE, UTASL,
+local news).
 
 ## Status
-See `docs/planning/status.md`. Proposal submitted. Implementation due Thu 5 Nov (moved from Sun 1 Nov).
+See `docs/planning/status.md`. Proposal submitted 19 Oct. Implementation due 10 Nov.
 
 ## Folder layout
 
@@ -32,21 +46,27 @@ docs/
   decisions.md   every decision so far – the live list
   data_sources.md  every data source: URL, method, history, terms
   ai_use_log.md  AI use, as the rules require
-src/data/        scripts that pull each data source
+src/data/        scripts that pull and clean each data source
+src/model/       the three pieces of Model 1 (assumptions, profile/quiz, simulation)
+web/             the Next.js website (the PLAN page runs Model 1 in the browser)
 data/raw/        raw pulls, one file per source per day
+data/clean/      cleaned data the model reads
 .github/         scheduled daily refresh (CSE only; CBSL steps run from a local machine)
 scripts/         local refresh script + its scheduled-task setup
 ```
 
 ## Getting started
 
+### Data pipeline
+
 ```
 pip install -r requirements.txt
 python src/data/run_pipeline.py
 ```
 
-That one command runs every data step in order and writes the clean, checked files
-into `data/clean/`. Full details of each step: `docs/data_pipeline.md`.
+That one command runs every data step in order, writes the clean, checked files
+into `data/clean/`, and finishes by writing the website's numbers to
+`web/public/data/assumptions.json`. Full details of each step: `docs/data_pipeline.md`.
 
 **One source needs a manual step first.** UTASL (unit trust prices and performance)
 shows a "checking your browser" page to scripts, so two of the steps read a page you
@@ -66,6 +86,19 @@ warning and skip, and everything else still refreshes.
 steps are marked optional and skip with a warning rather than stopping the pipeline).
 `scripts/refresh_local.bat` is a local version of the same command for a machine that
 can reach CBSL directly — see `docs/data_pipeline.md` for how to schedule it.
+
+### Website
+
+```
+cd web
+npm install
+npm run dev
+```
+
+Then open http://localhost:3000 — the PLAN tab runs the quiz and shows your
+recommended split and simulated outcomes. The site reads its numbers from
+`web/public/data/assumptions.json`, which the data pipeline writes automatically
+on every run (see above) — no code change needed when the underlying data updates.
 
 ## Data sources
 
