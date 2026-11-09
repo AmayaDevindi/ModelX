@@ -1,13 +1,3 @@
-Claude
-
-
-
-
-
-
-
-
-Readme · MD
 # ModelX – Sri Lanka Investment Guide
  
 A tool for Sri Lankans who want to invest but don't know where to start.
@@ -129,8 +119,3 @@ Then open http://localhost:3000. The site reads its numbers from `web/public/dat
 - Model 3 is rule-based and not backtested.
 - Model 2 uses governance and market-risk features only, not company financials.
 - Model 4 covers 2 of the 23 companies.
-## AI use
- 
-Claude was used for planning, code help and drafting. Details are in `docs/ai_use_log.md`.
- 
-Claude finished the response
