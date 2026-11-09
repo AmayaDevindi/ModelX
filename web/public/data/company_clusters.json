@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T05:43:00.522248+00:00",
+  "generated_at": "2026-11-09T06:49:01.474788+00:00",
   "companies": [
     {
       "symbol": "AEL.N0000",
@@ -10,7 +10,7 @@
       "beta": 1.2138227263634755,
       "independent_ratio": 0.429,
       "is_big4_auditor": 1,
-      "position_in_52wk_range": 0.99
+      "position_in_52wk_range": 1.029
     },
     {
       "symbol": "CIC.X0000",
@@ -32,7 +32,7 @@
       "beta": 1.2524905712416543,
       "independent_ratio": 1.0,
       "is_big4_auditor": 1,
-      "position_in_52wk_range": 0.878
+      "position_in_52wk_range": 0.883
     },
     {
       "symbol": "SINS.N0000",
@@ -43,7 +43,7 @@
       "beta": 1.8213976054682015,
       "independent_ratio": 0.5,
       "is_big4_auditor": 1,
-      "position_in_52wk_range": 0.342
+      "position_in_52wk_range": 0.339
     },
     {
       "symbol": "SUN.N0000",
@@ -65,7 +65,7 @@
       "beta": 1.0798359155854478,
       "independent_ratio": 0.857,
       "is_big4_auditor": 1,
-      "position_in_52wk_range": 0.216
+      "position_in_52wk_range": 0.217
     },
     {
       "symbol": "CIC.N0000",
@@ -87,7 +87,7 @@
       "beta": 0.8893961921625618,
       "independent_ratio": 1.0,
       "is_big4_auditor": 1,
-      "position_in_52wk_range": 0.659
+      "position_in_52wk_range": 0.674
     },
     {
       "symbol": "COMB.X0000",
@@ -109,18 +109,29 @@
       "beta": 1.0918665226935902,
       "independent_ratio": 0.75,
       "is_big4_auditor": 1,
-      "position_in_52wk_range": 0.306
+      "position_in_52wk_range": 0.281
+    },
+    {
+      "symbol": "HAYL.N0000",
+      "sector": "Capital Goods",
+      "tier": "Lower price volatility",
+      "why": "board independence is below average; position in its 12-month range is above average",
+      "volatility": 24.720184834059285,
+      "beta": 1.0127931364563387,
+      "independent_ratio": 0.364,
+      "is_big4_auditor": 1,
+      "position_in_52wk_range": 0.634
     },
     {
       "symbol": "HHL.N0000",
       "sector": "Capital Goods",
       "tier": "Lower price volatility",
-      "why": "price volatility is below average; position in its 12-month range is above average",
+      "why": "price volatility is below average; Big 4 auditor is above average",
       "volatility": 21.152303463379354,
       "beta": 0.9735316193878704,
       "independent_ratio": 0.833,
       "is_big4_auditor": 1,
-      "position_in_52wk_range": 0.505
+      "position_in_52wk_range": 0.473
     },
     {
       "symbol": "HNB.N0000",
@@ -131,7 +142,7 @@
       "beta": 0.7391648262868648,
       "independent_ratio": 1.0,
       "is_big4_auditor": 1,
-      "position_in_52wk_range": 0.282
+      "position_in_52wk_range": 0.292
     },
     {
       "symbol": "HNB.X0000",
@@ -142,18 +153,18 @@
       "beta": 1.0096680939105651,
       "independent_ratio": 1.0,
       "is_big4_auditor": 1,
-      "position_in_52wk_range": 0.402
+      "position_in_52wk_range": 0.468
     },
     {
       "symbol": "JKH.N0000",
       "sector": "Capital Goods",
       "tier": "Lower price volatility",
-      "why": "board independence is above average; position in its 12-month range is below average",
+      "why": "board independence is above average; price volatility is below average",
       "volatility": 20.82552863579328,
       "beta": 0.8949631725498224,
       "independent_ratio": 1.0,
       "is_big4_auditor": 1,
-      "position_in_52wk_range": 0.254
+      "position_in_52wk_range": 0.288
     },
     {
       "symbol": "MELS.N0000",
@@ -164,7 +175,7 @@
       "beta": 0.6813574865621917,
       "independent_ratio": 0.889,
       "is_big4_auditor": 1,
-      "position_in_52wk_range": 0.734
+      "position_in_52wk_range": 0.806
     },
     {
       "symbol": "NDB.N0000",
@@ -175,7 +186,7 @@
       "beta": 0.9060352019993236,
       "independent_ratio": 0.875,
       "is_big4_auditor": 1,
-      "position_in_52wk_range": 0.231
+      "position_in_52wk_range": 0.235
     },
     {
       "symbol": "NTB.N0000",
@@ -186,7 +197,7 @@
       "beta": 0.8293118315435873,
       "independent_ratio": 0.6,
       "is_big4_auditor": 1,
-      "position_in_52wk_range": 0.549
+      "position_in_52wk_range": 0.56
     },
     {
       "symbol": "SAMP.N0000",
@@ -197,7 +208,7 @@
       "beta": 0.7444582422907338,
       "independent_ratio": 0.889,
       "is_big4_auditor": 1,
-      "position_in_52wk_range": 0.523
+      "position_in_52wk_range": 0.539
     },
     {
       "symbol": "ACL.N0000",
@@ -208,18 +219,7 @@
       "beta": 1.1339803835448423,
       "independent_ratio": 0.429,
       "is_big4_auditor": 0,
-      "position_in_52wk_range": 0.093
-    },
-    {
-      "symbol": "HAYL.N0000",
-      "sector": "Capital Goods",
-      "tier": "Medium price volatility",
-      "why": "board independence is below average; position in its 12-month range is above average",
-      "volatility": 24.720184834059285,
-      "beta": 1.0127931364563387,
-      "independent_ratio": 0.364,
-      "is_big4_auditor": 1,
-      "position_in_52wk_range": 0.604
+      "position_in_52wk_range": 0.098
     },
     {
       "symbol": "LIOC.N0000",
@@ -230,7 +230,7 @@
       "beta": 0.3146274795124579,
       "independent_ratio": 0.5,
       "is_big4_auditor": 0,
-      "position_in_52wk_range": 0.158
+      "position_in_52wk_range": 0.137
     },
     {
       "symbol": "LOLC.N0000",
@@ -252,7 +252,7 @@
       "beta": 1.148636458754317,
       "independent_ratio": 0.75,
       "is_big4_auditor": 0,
-      "position_in_52wk_range": 0.209
+      "position_in_52wk_range": 0.206
     }
   ]
 }
