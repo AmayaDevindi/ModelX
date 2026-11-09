@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import TabBar from "@/components/TabBar";
+import Shell from "@/components/Shell";
 import QuizModal from "@/components/QuizModal";
 import ResultsPanel from "@/components/ResultsPanel";
 import type { RecommendResult } from "@/lib/profile";
@@ -23,8 +23,11 @@ export default function Home() {
       // localStorage can throw in some contexts (private windows, etc.) -
       // just fall back to showing the quiz.
     }
+    // One-time hydration from localStorage on mount - can't run during
+    // render because localStorage isn't available during server rendering.
     if (saved) {
       try {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional
         setResult(JSON.parse(saved));
       } catch {
         setShowQuiz(true);
@@ -45,18 +48,8 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col flex-1">
-      <header className="flex items-center justify-between px-4 py-3 border-b border-border">
-        <div className="flex items-baseline gap-2">
-          <span className="text-accent font-semibold tracking-tight">ModelX</span>
-          <span className="text-muted text-xs">Sri Lanka investment terminal</span>
-        </div>
-        <span className="text-muted text-xs">education only &middot; not financial advice</span>
-      </header>
-
-      <TabBar />
-
-      <main className="flex-1 flex flex-col items-center justify-center p-8 gap-4">
+    <Shell>
+      <div className="flex-1 flex flex-col items-center justify-center gap-4 w-full">
         {result ? (
           <div className="w-full max-w-sm flex flex-col items-center gap-4">
             <p className="text-sm">
@@ -81,7 +74,7 @@ export default function Home() {
             Start the quiz
           </button>
         )}
-      </main>
+      </div>
 
       {showQuiz && (
         <QuizModal
@@ -89,6 +82,6 @@ export default function Home() {
           onClose={() => setShowQuiz(false)}
         />
       )}
-    </div>
+    </Shell>
   );
 }

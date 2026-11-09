@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import Shell from "@/components/Shell";
@@ -22,7 +22,7 @@ interface ClusterInfo {
   why: string;
 }
 
-export default function QuoteDetailPage() {
+function QuoteDetailContent() {
   const params = useParams<{ symbol: string }>();
   const symbol = decodeURIComponent(params.symbol);
 
@@ -108,5 +108,13 @@ export default function QuoteDetailPage() {
         )}
       </div>
     </Shell>
+  );
+}
+
+export default function QuoteDetailPage() {
+  return (
+    <Suspense fallback={<Shell><p className="text-xs text-muted">Loading...</p></Shell>}>
+      <QuoteDetailContent />
+    </Suspense>
   );
 }

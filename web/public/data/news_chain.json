@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-11-09T05:43:00.540063+00:00",
+  "tags": [
+    {
+      "published": "2026-11-09 10:35",
+      "title": "Sri Lanka rupee at 332.54/58 to US dollar spot, bond yields steady",
+      "link": "https://economynext.com/sri-lanka-rupee-at-332-54-58-to-us-dollar-spot-bond-yields-steady-289304/",
+      "factor": "Rupee / exchange rate",
+      "direction": "unclear",
+      "effects": "",
+      "confidence": "very low (no clear direction word)"
+    },
+    {
+      "published": "2026-11-08 18:29",
+      "title": "Foreign investors exit Sri Lanka rupee bonds for third straight week",
+      "link": "https://economynext.com/foreign-investors-exit-sri-lanka-rupee-bonds-for-third-straight-week-289278/",
+      "factor": "Rupee / exchange rate",
+      "direction": "unclear",
+      "effects": "",
+      "confidence": "very low (no clear direction word)"
+    },
+    {
+      "published": "2026-11-06 13:13",
+      "title": "Sri Lanka poverty rises to 16-pct as inflation drives living costs up",
+      "link": "https://economynext.com/sri-lanka-poverty-rises-to-16-pct-as-inflation-drives-living-costs-up-289177/",
+      "factor": "Inflation",
+      "direction": "up",
+      "effects": "Fixed-income savers (FDs/bonds): negative (real (after-inflation) returns erode faster); CBSL policy: pressure to raise rates (central banks typically respond to rising inflation)",
+      "confidence": "low"
+    },
+    {
+      "published": "2026-11-06 11:53",
+      "title": "Sri Lanka rupee closes at 332.55/60 to US dollar spot, bond yields drop",
+      "link": "https://economynext.com/sri-lanka-rupee-closes-at-332-55-60-to-us-dollar-spot-bond-yields-drop-289252/",
+      "factor": "Rupee / exchange rate",
+      "direction": "down",
+      "effects": "Importers: negative (imports cost more in rupees); Exporters (apparel, tea): positive (export earnings worth more in rupees); Inflation (economy-wide): upward pressure (costlier imported goods and fuel)",
+      "confidence": "low"
+    },
+    {
+      "published": "2026-11-06 10:02",
+      "title": "Sri Lanka rupee at 332.60/65 to US dollar spot, bond yields edge up",
+      "link": "https://economynext.com/sri-lanka-rupee-at-332-60-65-to-us-dollar-spot-bond-yields-edge-up-289163/",
+      "factor": "Rupee / exchange rate",
+      "direction": "unclear",
+      "effects": "",
+      "confidence": "very low (no clear direction word)"
+    },
+    {
+      "published": "2026-11-05 18:04",
+      "title": "Sri Lanka rupee at 332.45/55 to US dollar spot, bond yields drop",
+      "link": "https://economynext.com/sri-lanka-rupee-at-332-45-55-to-us-dollar-spot-bond-yields-drop-289007/",
+      "factor": "Rupee / exchange rate",
+      "direction": "down",
+      "effects": "Importers: negative (imports cost more in rupees); Exporters (apparel, tea): positive (export earnings worth more in rupees); Inflation (economy-wide): upward pressure (costlier imported goods and fuel)",
+      "confidence": "low"
+    }
+  ]
+}

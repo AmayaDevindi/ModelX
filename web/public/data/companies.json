@@ -1,0 +1,189 @@
+{
+  "generated_at": "2026-11-09T05:43:01.392761+00:00",
+  "companies": [
+    {
+      "symbol": "ACL.N0000",
+      "name": "ACL CABLES PLC",
+      "sector": "Capital Goods",
+      "last_price": 97.7,
+      "change": -0.1,
+      "change_pct": -0.10224948875255624
+    },
+    {
+      "symbol": "AEL.N0000",
+      "name": "ACCESS ENGINEERING PLC",
+      "sector": "Capital Goods",
+      "last_price": 80.7,
+      "change": 1.9,
+      "change_pct": 2.4111675126903553
+    },
+    {
+      "symbol": "CFIN.N0000",
+      "name": "CENTRAL FINANCE COMPANY PLC",
+      "sector": "Diversified Financials",
+      "last_price": 218.0,
+      "change": -0.5,
+      "change_pct": -0.2288329519450801
+    },
+    {
+      "symbol": "CIC.N0000",
+      "name": "C I C HOLDINGS PLC",
+      "sector": "Materials",
+      "last_price": 28.0,
+      "change": 0.2,
+      "change_pct": 0.7194244604316546
+    },
+    {
+      "symbol": "CIC.X0000",
+      "name": "C I C HOLDINGS PLC",
+      "sector": "Materials",
+      "last_price": 24.0,
+      "change": 0.1,
+      "change_pct": 0.41841004184100417
+    },
+    {
+      "symbol": "COMB.N0000",
+      "name": "COMMERCIAL BANK OF CEYLON PLC",
+      "sector": "Banks",
+      "last_price": 213.0,
+      "change": 3.0,
+      "change_pct": 1.4285714285714286
+    },
+    {
+      "symbol": "COMB.X0000",
+      "name": "COMMERCIAL BANK OF CEYLON PLC",
+      "sector": "Banks",
+      "last_price": 192.25,
+      "change": 2.75,
+      "change_pct": 1.4511873350923483
+    },
+    {
+      "symbol": "DFCC.N0000",
+      "name": "DFCC BANK PLC",
+      "sector": "Banks",
+      "last_price": 133.0,
+      "change": 2.75,
+      "change_pct": 2.111324376199616
+    },
+    {
+      "symbol": "DIAL.N0000",
+      "name": "DIALOG AXIATA PLC",
+      "sector": "Telecommunication Services",
+      "last_price": 47.0,
+      "change": -0.1,
+      "change_pct": -0.21231422505307856
+    },
+    {
+      "symbol": "HAYL.N0000",
+      "name": "HAYLEYS PLC",
+      "sector": "Capital Goods",
+      "last_price": 227.5,
+      "change": -1.25,
+      "change_pct": -0.546448087431694
+    },
+    {
+      "symbol": "HHL.N0000",
+      "name": "HEMAS HOLDINGS PLC",
+      "sector": "Capital Goods",
+      "last_price": 32.2,
+      "change": 0.6,
+      "change_pct": 1.8987341772151898
+    },
+    {
+      "symbol": "HNB.N0000",
+      "name": "HATTON NATIONAL BANK PLC",
+      "sector": "Banks ",
+      "last_price": 393.0,
+      "change": -0.75,
+      "change_pct": -0.19047619047619047
+    },
+    {
+      "symbol": "HNB.X0000",
+      "name": "HATTON NATIONAL BANK PLC",
+      "sector": "Banks ",
+      "last_price": 342.75,
+      "change": 0.75,
+      "change_pct": 0.21929824561403508
+    },
+    {
+      "symbol": "JKH.N0000",
+      "name": "JOHN KEELLS HOLDINGS PLC",
+      "sector": "Capital Goods",
+      "last_price": 19.0,
+      "change": 0.3,
+      "change_pct": 1.6042780748663101
+    },
+    {
+      "symbol": "LIOC.N0000",
+      "name": "LANKA IOC PLC",
+      "sector": "Energy",
+      "last_price": 127.0,
+      "change": 0.75,
+      "change_pct": 0.594059405940594
+    },
+    {
+      "symbol": "LOLC.N0000",
+      "name": "L O L C HOLDINGS PLC",
+      "sector": "Diversified Financials",
+      "last_price": 400.0,
+      "change": -2.5,
+      "change_pct": -0.6211180124223602
+    },
+    {
+      "symbol": "MELS.N0000",
+      "name": "MELSTACORP PLC",
+      "sector": "Food Beverage & Tobacco",
+      "last_price": 184.0,
+      "change": -1.0,
+      "change_pct": -0.5405405405405406
+    },
+    {
+      "symbol": "NDB.N0000",
+      "name": "NATIONAL DEVELOPMENT BANK PLC",
+      "sector": "Banks ",
+      "last_price": 113.75,
+      "change": 0.0,
+      "change_pct": 0.0
+    },
+    {
+      "symbol": "NTB.N0000",
+      "name": "NATIONS TRUST BANK PLC",
+      "sector": "Banks ",
+      "last_price": 315.0,
+      "change": 4.5,
+      "change_pct": 1.4492753623188406
+    },
+    {
+      "symbol": "SAMP.N0000",
+      "name": "SAMPATH BANK PLC",
+      "sector": "Banks ",
+      "last_price": 151.5,
+      "change": -0.5,
+      "change_pct": -0.32894736842105265
+    },
+    {
+      "symbol": "SINS.N0000",
+      "name": "SINGER (SRI LANKA) PLC",
+      "sector": "Retailing",
+      "last_price": 75.0,
+      "change": 0.9,
+      "change_pct": 1.214574898785425
+    },
+    {
+      "symbol": "SUN.N0000",
+      "name": "SUNSHINE HOLDINGS PLC",
+      "sector": "Food Beverage & Tobacco",
+      "last_price": 30.8,
+      "change": 0.2,
+      "change_pct": 0.6535947712418301
+    },
+    {
+      "symbol": "VONE.N0000",
+      "name": "VALLIBEL ONE PLC",
+      "sector": "Utilities",
+      "last_price": 89.7,
+      "change": 0.7,
+      "change_pct": 0.7865168539325843
+    }
+  ]
+}
