@@ -1,5 +1,7 @@
 # 08 – Timeline and tasks
 
+> **Superseded.** This was the original plan from 15 Oct. The real timeline moved a lot since (deadline changes, scope cuts). For what actually happened and the final status, see `docs/planning/status.md` and `docs/decisions.md` (D41-D53), not the table below.
+
 Owners: [NEED: agree who leads each bucket – the proposal (section 8) needs names]
 
 | Bucket | What | Target | Owner | Status (15 Oct) |

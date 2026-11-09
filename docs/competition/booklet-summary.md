@@ -5,6 +5,8 @@ Source: https://modelx2.pages.dev/ (checked 15 Oct 2026). If anything here confl
 Build a system that gives people insight they couldn't reach alone: a pattern, risk, trend or anomaly. **Retrieval alone doesn't count.** Output must be trustworthy, show what the data can't support, and fail safely. Our domain: economy & livelihoods (template domain 01, cost of living and everyday economics).
 
 ## Dates
+> **Note (9 Nov):** the organisers moved the Submission 2 deadline twice since this booklet snapshot - first to Thu 5 Nov, then confirmed as **Mon 10 Nov 2026** (see docs/decisions.md D42, D49). The table below is the original booklet date.
+
 | Date | Milestone |
 |---|---|
 | 10–19 Oct | Phase 1: research |

@@ -6,6 +6,8 @@ Source: https://modelx2.pages.dev/ (checked 15 Oct 2026). If this summary and th
 Build a system that tells people something they couldn't work out alone – a pattern, risk, trend or anomaly. **Just showing data back (retrieval) doesn't count as insight.** The output must be trustworthy, show what the data can't support, and fail safely. Any method is allowed. Our domain: Economy & livelihoods.
 
 ## Dates
+> **Note (9 Nov):** the organisers moved the Submission 2 deadline twice since this booklet snapshot - first to Thu 5 Nov, then confirmed as **Mon 10 Nov 2026** (see docs/decisions.md D42, D49). The table below is the original booklet date.
+
 | Date | Milestone |
 |---|---|
 | 10–19 Oct | Phase 1: research |
