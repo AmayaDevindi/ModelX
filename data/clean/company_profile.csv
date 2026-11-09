@@ -1,24 +1,24 @@
 symbol,sector,auditor,is_big4_auditor,director_count,independent_director_count,independent_ratio,last_price,p12_high,p12_low,position_in_52wk_range
-AEL.N0000,Capital Goods,"KPMG Ford, Rhodes, Thornton & Co. (Chartered Accountants) No.32 A, Sir Mohamed Macan Markar Mawatha, Colombo 03. Tel: +94 11 5426426, Fax: +94 11 2445872.",True,7,3,0.429,80.7,80.9,60.0,0.99
-ACL.N0000,Capital Goods,M/s Pricewaterhouse Coopers,False,7,3,0.429,97.7,260.25,81.1,0.093
-CFIN.N0000,Diversified Financials,"M/s KPMG, Chartered Accountants of 32 A, Sri Mohamed Macan Marker Mawatha, Colombo 03",True,7,6,0.857,218.0,319.0,190.25,0.216
+AEL.N0000,Capital Goods,"KPMG Ford, Rhodes, Thornton & Co. (Chartered Accountants) No.32 A, Sir Mohamed Macan Markar Mawatha, Colombo 03. Tel: +94 11 5426426, Fax: +94 11 2445872.",True,7,3,0.429,81.5,80.9,60.0,1.029
+ACL.N0000,Capital Goods,M/s Pricewaterhouse Coopers,False,7,3,0.429,98.7,260.25,81.1,0.098
+CFIN.N0000,Diversified Financials,"M/s KPMG, Chartered Accountants of 32 A, Sri Mohamed Macan Marker Mawatha, Colombo 03",True,7,6,0.857,218.25,319.0,190.25,0.217
 CIC.N0000,Materials,"Messrs. KPMG Ford, Rhodes, Thornton & Company",True,6,6,1.0,28.0,38.8,24.5,0.245
 CIC.X0000,Materials,"Messrs. KPMG Ford, Rhodes, Thornton & Company",True,6,6,1.0,24.0,30.9,21.2,0.289
-COMB.N0000,Banks,Messrs KPMG,True,9,9,1.0,213.0,235.25,170.0,0.659
+COMB.N0000,Banks,Messrs KPMG,True,9,9,1.0,214.0,235.25,170.0,0.674
 COMB.X0000,Banks,Messrs KPMG,True,9,9,1.0,192.25,210.0,176.0,0.478
-DFCC.N0000,Banks,"Messrs. Ernst & Young, Chartered Accountants",True,8,6,0.75,133.0,175.0,114.5,0.306
-DIAL.N0000,Telecommunication Services,Deloitte Partners,True,7,7,1.0,47.1,49.9,26.9,0.878
-HNB.N0000,Banks ,M/s Ernst & Young,True,9,9,1.0,393.0,460.0,366.75,0.282
-HNB.X0000,Banks ,M/s Ernst & Young,True,9,9,1.0,343.0,404.0,302.0,0.402
-HAYL.N0000,Capital Goods,Messrs Ernst & Young ,True,11,4,0.364,227.5,260.0,178.0,0.604
-HHL.N0000,Capital Goods,Ernst & Young,True,6,5,0.833,32.2,36.7,27.6,0.505
-JKH.N0000,Capital Goods,"Messrs. Ernst & Young,",True,6,6,1.0,19.0,23.4,17.5,0.254
-LIOC.N0000,Energy,BDO Partners - Sri Lanka,False,4,2,0.5,127.25,158.0,121.5,0.158
+DFCC.N0000,Banks,"Messrs. Ernst & Young, Chartered Accountants",True,8,6,0.75,131.5,175.0,114.5,0.281
+DIAL.N0000,Telecommunication Services,Deloitte Partners,True,7,7,1.0,47.2,49.9,26.9,0.883
+HNB.N0000,Banks ,M/s Ernst & Young,True,9,9,1.0,394.0,460.0,366.75,0.292
+HNB.X0000,Banks ,M/s Ernst & Young,True,9,9,1.0,349.75,404.0,302.0,0.468
+HAYL.N0000,Capital Goods,Messrs Ernst & Young ,True,11,4,0.364,230.0,260.0,178.0,0.634
+HHL.N0000,Capital Goods,Ernst & Young,True,6,5,0.833,31.9,36.7,27.6,0.473
+JKH.N0000,Capital Goods,"Messrs. Ernst & Young,",True,6,6,1.0,19.2,23.4,17.5,0.288
+LIOC.N0000,Energy,BDO Partners - Sri Lanka,False,4,2,0.5,126.5,158.0,121.5,0.137
 LOLC.N0000,Diversified Financials,Deloitte Partners,True,5,2,0.4,400.0,640.0,370.0,0.111
-MELS.N0000,Food Beverage & Tobacco,"Messrs. KPMG, 32A, Sir Mohamed Macan Marker Mawatha, Colombo 03.",True,9,8,0.889,184.0,193.25,158.5,0.734
-NDB.N0000,Banks ,"Messrs KPMG, Chartered accountants",True,8,7,0.875,114.0,159.0,100.5,0.231
-NTB.N0000,Banks ,"Messrs KPMG, Chartered Accountants",True,10,6,0.6,315.0,356.0,265.0,0.549
-SAMP.N0000,Banks ,"Messrs.KPMG, Chartered Accountants",True,9,8,0.889,151.75,167.0,135.0,0.523
-SINS.N0000,Retailing,"Messrs. KPMG Ford, Rhodes, Thornton & Company",True,10,5,0.5,75.0,101.0,61.5,0.342
+MELS.N0000,Food Beverage & Tobacco,"Messrs. KPMG, 32A, Sir Mohamed Macan Marker Mawatha, Colombo 03.",True,9,8,0.889,186.5,193.25,158.5,0.806
+NDB.N0000,Banks ,"Messrs KPMG, Chartered accountants",True,8,7,0.875,114.25,159.0,100.5,0.235
+NTB.N0000,Banks ,"Messrs KPMG, Chartered Accountants",True,10,6,0.6,316.0,356.0,265.0,0.56
+SAMP.N0000,Banks ,"Messrs.KPMG, Chartered Accountants",True,9,8,0.889,152.25,167.0,135.0,0.539
+SINS.N0000,Retailing,"Messrs. KPMG Ford, Rhodes, Thornton & Company",True,10,5,0.5,74.9,101.0,61.5,0.339
 SUN.N0000,Food Beverage & Tobacco,"Messrs. KPMG Ford, Rhodes, Thornton and Company",True,7,6,0.857,30.8,39.6,26.2,0.343
-VONE.N0000,Utilities,Ernst and Young,False,8,6,0.75,89.7,115.0,83.0,0.209
+VONE.N0000,Utilities,Ernst and Young,False,8,6,0.75,89.6,115.0,83.0,0.206
