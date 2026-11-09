@@ -46,7 +46,14 @@ plain keyword rules, per the team's own documented fallback. Script:
 `src/model/news_chain.py`.
 
 Both Model 2 and Model 3 run automatically as part of the daily pipeline
-(`run_pipeline.py`) and write their output to `data/clean/`.
+(`run_pipeline.py`), write their output to `data/clean/`, and are shown live on
+the website: the **FA** tab for Model 2, the **NEWS** tab for Model 3.
+
+**QUOTE tab**: one page per S&P SL20 company with its live TradingView chart
+(CSE has an official TradingView data partnership, so the same symbols we use
+elsewhere work directly - e.g. `CSELK:JKH.N0000`), our own pulled price history
+alongside it for transparency on what feeds Model 1/2, and that company's
+Model 2 group with its reasoning.
 
 Data comes only from Sri Lankan official or authorised sources (CBSL, CSE, UTASL,
 local news).
