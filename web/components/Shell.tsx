@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import TabBar from "@/components/TabBar";
 
 export default function Shell({ children }: { children: React.ReactNode }) {
@@ -11,7 +12,12 @@ export default function Shell({ children }: { children: React.ReactNode }) {
         <span className="text-muted text-xs">education only &middot; not financial advice</span>
       </header>
 
-      <TabBar />
+      {/* TabBar reads the current URL (usePathname) to highlight the active
+          tab, which is only known at request time - Suspense lets the rest
+          of the page prerender while that one piece streams in. */}
+      <Suspense fallback={<div className="h-[41px] border-b border-border" />}>
+        <TabBar />
+      </Suspense>
 
       <main className="flex-1 flex flex-col items-center p-8">{children}</main>
     </div>
