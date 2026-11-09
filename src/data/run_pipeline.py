@@ -24,6 +24,7 @@ STEPS = [
     ("Pull UTASL fund performance",  "src/data/utasl_performance_pull.py", False),
     ("Pull CBSL USD/LKR rate",       "src/data/cbsl_fx_pull.py",          False),
     ("Pull news headlines",          "src/data/news_pull.py",             False),
+    ("Tag news with economic factors (Model 3)", "src/model/news_chain.py", False),
     ("Combine into one price table", "src/data/clean_cse_prices.py",      True),
     ("Find and fix price anomalies", "src/data/check_jumps.py",           True),
     ("Make model inputs + quality",  "src/data/make_model_inputs.py",     True),
