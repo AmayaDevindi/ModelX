@@ -27,6 +27,7 @@ STEPS = [
     ("Combine into one price table", "src/data/clean_cse_prices.py",      True),
     ("Find and fix price anomalies", "src/data/check_jumps.py",           True),
     ("Make model inputs + quality",  "src/data/make_model_inputs.py",     True),
+    ("Export model numbers for the website", "src/data/export_model_json.py", True),
 ]
 
 skipped = []

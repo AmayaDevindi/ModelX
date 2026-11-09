@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/* Always dark - this is a terminal-style app, not a light/dark toggle site. */
+:root {
+  --background: #0a0b0a;
+  --foreground: #d9ddd9;
+  --accent: #4ade80;
+  --muted: #6b7280;
+  --border: #262a26;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: var(--font-geist-mono);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}

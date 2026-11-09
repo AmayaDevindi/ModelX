@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-11-09T00:53:21.847807+00:00",
+  "equity_premium": 5.0,
+  "inflation": 8.3,
+  "inflation_month": "2026-10",
+  "assets": [
+    {
+      "name": "Savings",
+      "mean": 4.55,
+      "sd": 0.0,
+      "low": 0.1,
+      "high": 9.0,
+      "note": "CBSL Table 4.04, 2026-07: banks pay 0.1% to 9.0%."
+    },
+    {
+      "name": "Fixed deposits",
+      "mean": 8.83,
+      "sd": 0.0,
+      "low": 2.5,
+      "high": 11.75,
+      "note": "CBSL Table 4.04, 2026-07: average new FD rate 8.83%, 12-month FDs quoted 2.5% to 11.75%."
+    },
+    {
+      "name": "T-bills & bonds",
+      "mean": 9.91,
+      "sd": 1.8810723891794625,
+      "low": 8.028927610820539,
+      "high": 11.791072389179462,
+      "note": "CBSL weekly PDF, 2026-11-06: 12-month bill yield 9.91%. Risk = size of month-to-month yield moves over the last 3 years."
+    },
+    {
+      "name": "Unit trusts",
+      "mean": 8.466666666666665,
+      "sd": 2.0015803142100466,
+      "low": 5.4559999999999995,
+      "high": 10.224000000000002,
+      "note": "UTASL report 2026-09: 53 income/money-market/gilt funds, year-to-date return scaled to 12 months."
+    },
+    {
+      "name": "Shares (S&P SL20)",
+      "mean": 14.91,
+      "sd": 17.11182917412004,
+      "low": -2.2018291741200393,
+      "high": 32.02182917412004,
+      "note": "21 CSE stocks, 242 days: yearly risk 17.1%. Average return = today's 12-month T-bill (9.91%) + our 5.0% premium (D47). For reference, actual return over the last 242 days was -5.6% - too short and too unusual a period to use directly."
+    }
+  ]
+}
