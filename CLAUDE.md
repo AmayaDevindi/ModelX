@@ -14,7 +14,7 @@ Core decision it drives: "How should I split my money right now, given my risk a
 
 ## Deadlines
 - Proposal: Mon 19 Oct 2026
-- Implementation (report, public repo, 2-page summary, 3-min video): **Thu 5 Nov 2026** (moved from Sun 1 Nov; check the exact cut-off time)
+- Implementation (report, public repo, 2-page summary, 3-min video): **Mon 10 Nov 2026** (confirmed - see D49)
 - Final live pitch: Sat 14 Nov 2026
 
 ## Agreed decisions – do not drift from these without asking
