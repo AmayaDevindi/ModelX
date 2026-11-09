@@ -17,6 +17,7 @@ STEPS = [
     # name,                          script,                              required?
     ("Pull S&P SL20 snapshot",       "src/data/cse_pull.py",              True),
     ("Pull history for all stocks",  "src/data/cse_history_all.py",       True),
+    ("Pull company governance & price range (Model 2)", "src/data/cse_company_profile_pull.py", False),
     ("Pull CBSL monthly rates",      "src/data/cbsl_rates_pull.py",       False),
     ("Pull CBSL inflation (CCPI)",   "src/data/cbsl_ccpi_pull.py",        False),
     ("Pull CBSL weekly yields (PDF)", "src/data/cbsl_weekly_pull.py",     False),
@@ -28,6 +29,7 @@ STEPS = [
     ("Combine into one price table", "src/data/clean_cse_prices.py",      True),
     ("Find and fix price anomalies", "src/data/check_jumps.py",           True),
     ("Make model inputs + quality",  "src/data/make_model_inputs.py",     True),
+    ("Group companies by risk profile (Model 2)", "src/model/health_cluster.py", False),
     ("Export model numbers for the website", "src/data/export_model_json.py", True),
 ]
 
