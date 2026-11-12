@@ -1,24 +1,24 @@
 symbol,sector,tier,why,volatility,beta,independent_ratio,is_big4_auditor,position_in_52wk_range
-AEL.N0000,Capital Goods,Higher price volatility,position in its 12-month range is above average; board independence is below average,28.306520960410005,1.2022337958323603,0.429,1,1.089
-CFIN.N0000,Diversified Financials,Higher price volatility,position in its 12-month range is below average; Big 4 auditor is above average,25.172296435902542,1.0737879155214969,0.857,1,0.32
-CIC.N0000,Materials,Higher price volatility,board independence is above average; position in its 12-month range is below average,25.309027791782373,1.0947015328419443,1.0,1,0.315
-CIC.X0000,Materials,Higher price volatility,price volatility is above average; sensitivity to market moves is above average,33.47445541453637,1.4684974310773196,1.0,1,0.371
-DFCC.N0000,Banks,Higher price volatility,Big 4 auditor is above average; sensitivity to market moves is above average,24.560888127548637,1.1087817726245257,0.75,1,0.5
-DIAL.N0000,Telecommunication Services,Higher price volatility,position in its 12-month range is above average; price volatility is above average,30.372666048093265,1.2397370679971251,1.0,1,0.991
-HAYL.N0000,Capital Goods,Higher price volatility,board independence is below average; position in its 12-month range is above average,25.041612732711492,1.0139904891914533,0.364,1,0.729
-NDB.N0000,Banks ,Higher price volatility,position in its 12-month range is below average; price volatility is above average,28.003087864667354,0.8889081286193756,0.875,1,0.256
-SINS.N0000,Retailing,Higher price volatility,sensitivity to market moves is above average; price volatility is above average,38.67098747913925,1.8126047505383511,0.5,1,0.443
-SUN.N0000,Food Beverage & Tobacco,Higher price volatility,sensitivity to market moves is above average; price volatility is above average,29.968949557216057,1.3839166253482302,0.857,1,0.398
-COMB.N0000,Banks,Lower price volatility,position in its 12-month range is above average; price volatility is below average,18.55227308467042,0.910624226296478,1.0,1,0.839
-COMB.X0000,Banks,Lower price volatility,board independence is above average; price volatility is below average,19.705293681616265,0.8704809571568752,1.0,1,0.574
-HHL.N0000,Capital Goods,Lower price volatility,price volatility is below average; Big 4 auditor is above average,21.327300544321602,0.9701378084334145,0.833,1,0.593
-HNB.N0000,Banks ,Lower price volatility,price volatility is below average; board independence is above average,17.049186449161233,0.7493803952393485,1.0,1,0.464
-HNB.X0000,Banks ,Lower price volatility,board independence is above average; Big 4 auditor is above average,22.38233031541549,1.0177661546071526,1.0,1,0.569
-JKH.N0000,Capital Goods,Lower price volatility,board independence is above average; position in its 12-month range is below average,20.93129953309801,0.8863727422581795,1.0,1,0.373
-MELS.N0000,Food Beverage & Tobacco,Lower price volatility,position in its 12-month range is above average; price volatility is below average,17.311286416016568,0.6906036634103456,0.889,1,0.942
-NTB.N0000,Banks ,Lower price volatility,price volatility is below average; board independence is below average,19.381874004793733,0.8483790080575214,0.6,1,0.723
-SAMP.N0000,Banks ,Lower price volatility,price volatility is below average; sensitivity to market moves is below average,17.740961275431196,0.7400886288802303,0.889,1,0.688
-ACL.N0000,Capital Goods,Medium price volatility,Big 4 auditor is below average; position in its 12-month range is below average,28.214448248570555,1.1382006046226765,0.429,0,0.119
-LIOC.N0000,Energy,Medium price volatility,Big 4 auditor is below average; sensitivity to market moves is below average,17.116302966564216,0.3339349377878758,0.5,0,0.226
-LOLC.N0000,Diversified Financials,Medium price volatility,board independence is below average; position in its 12-month range is below average,20.658469317665823,0.7574050600698256,0.4,1,0.142
-VONE.N0000,Utilities,Medium price volatility,Big 4 auditor is below average; position in its 12-month range is below average,24.800885185887704,1.1568718632845871,0.75,0,0.369
+AEL.N0000,Capital Goods,Higher price volatility,position in its 12-month range is above average; board independence is below average,28.254906363555847,1.2024806784604891,0.429,1,0.991
+CFIN.N0000,Diversified Financials,Higher price volatility,position in its 12-month range is below average; Big 4 auditor is above average,25.126248972193686,1.0739985513163113,0.857,1,0.332
+CIC.N0000,Materials,Higher price volatility,board independence is above average; position in its 12-month range is below average,25.321294395811574,1.0962619679052186,1.0,1,0.35
+CIC.X0000,Materials,Higher price volatility,price volatility is above average; sensitivity to market moves is above average,33.446697866277866,1.469770870053666,1.0,1,0.412
+DFCC.N0000,Banks,Higher price volatility,Big 4 auditor is above average; sensitivity to market moves is above average,24.53825553357764,1.1071186779051443,0.75,1,0.471
+DIAL.N0000,Telecommunication Services,Higher price volatility,position in its 12-month range is above average; price volatility is above average,30.312789257744,1.2397510489734247,1.0,1,1.004
+HAYL.N0000,Capital Goods,Higher price volatility,board independence is below average; position in its 12-month range is above average,24.989940536692785,1.0135456381069354,0.364,1,0.729
+NDB.N0000,Banks ,Higher price volatility,position in its 12-month range is below average; price volatility is above average,27.955944405200388,0.889428781867495,0.875,1,0.269
+SINS.N0000,Retailing,Higher price volatility,sensitivity to market moves is above average; price volatility is above average,38.59214224878858,1.8122785500550098,0.5,1,0.448
+SUN.N0000,Food Beverage & Tobacco,Higher price volatility,sensitivity to market moves is above average; price volatility is above average,29.915608519581205,1.3841994061320506,0.857,1,0.457
+COMB.N0000,Banks,Lower price volatility,position in its 12-month range is above average; price volatility is below average,18.515072061526347,0.9105243838527184,1.0,1,0.843
+COMB.X0000,Banks,Lower price volatility,board independence is above average; price volatility is below average,19.666295951300704,0.8698871765874675,1.0,1,0.559
+HHL.N0000,Capital Goods,Lower price volatility,price volatility is below average; Big 4 auditor is above average,21.292776934493013,0.9704815064675113,0.833,1,0.615
+HNB.N0000,Banks ,Lower price volatility,price volatility is below average; board independence is above average,17.01821284212109,0.7495256173599361,1.0,1,0.48
+HNB.X0000,Banks ,Lower price volatility,board independence is above average; Big 4 auditor is above average,22.336275068945813,1.0172925547544838,1.0,1,0.566
+JKH.N0000,Capital Goods,Lower price volatility,board independence is above average; position in its 12-month range is below average,20.88807820594923,0.8861153034586092,1.0,1,0.373
+MELS.N0000,Food Beverage & Tobacco,Lower price volatility,position in its 12-month range is above average; price volatility is below average,17.32607525711323,0.6917851595620702,0.889,1,1.014
+NTB.N0000,Banks ,Lower price volatility,price volatility is below average; board independence is below average,19.34810106594081,0.8475435436436207,0.6,1,0.706
+SAMP.N0000,Banks ,Lower price volatility,price volatility is below average; sensitivity to market moves is below average,17.704278109529973,0.739805034832873,0.889,1,0.688
+ACL.N0000,Capital Goods,Medium price volatility,Big 4 auditor is below average; position in its 12-month range is below average,28.200882615775598,1.1395092812446714,0.429,0,0.129
+LIOC.N0000,Energy,Medium price volatility,Big 4 auditor is below average; sensitivity to market moves is below average,17.13569804786109,0.332338644936687,0.5,0,0.178
+LOLC.N0000,Diversified Financials,Medium price volatility,board independence is below average; position in its 12-month range is below average,20.67402128553342,0.7588088940056485,0.4,1,0.163
+VONE.N0000,Utilities,Medium price volatility,Big 4 auditor is below average; position in its 12-month range is below average,24.75103641912701,1.1567483804391205,0.75,0,0.375
