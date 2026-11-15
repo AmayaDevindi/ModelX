@@ -6,8 +6,8 @@ HAYL.N0000,Capital Goods,Higher price volatility,board independence is below ave
 SINS.N0000,Retailing,Higher price volatility,sensitivity to market moves is above average; price volatility is above average,38.58540119829239,1.8102066457866361,0.5,1,0.4
 SUN.N0000,Food Beverage & Tobacco,Higher price volatility,sensitivity to market moves is above average; price volatility is above average,29.94738868896651,1.382515618054244,0.857,1,0.42
 CFIN.N0000,Diversified Financials,Lower price volatility,position in its 12-month range is below average; Big 4 auditor is above average,25.210332633044153,1.0754179949629188,0.857,1,0.315
-CIC.N0000,Materials,Lower price volatility,board independence is above average; position in its 12-month range is below average,25.48245009124169,1.1012745548298517,1.0,1,0.301
-COMB.N0000,Banks,Lower price volatility,position in its 12-month range is above average; price volatility is below average,18.525825663083133,0.9050163578468575,1.0,1,0.847
+CIC.N0000,Materials,Lower price volatility,board independence is above average; position in its 12-month range is below average,25.48245009124169,1.1012745548298515,1.0,1,0.301
+COMB.N0000,Banks,Lower price volatility,position in its 12-month range is above average; price volatility is below average,18.525825663083133,0.9050163578468576,1.0,1,0.847
 COMB.X0000,Banks,Lower price volatility,board independence is above average; price volatility is below average,19.621347549335088,0.8648647550899242,1.0,1,0.529
 DFCC.N0000,Banks,Lower price volatility,Big 4 auditor is above average; position in its 12-month range is below average,24.742426418026227,1.1134539128785859,0.75,1,0.405
 HHL.N0000,Capital Goods,Lower price volatility,price volatility is below average; position in its 12-month range is above average,21.272833239150646,0.9702385106820052,0.833,1,0.604
