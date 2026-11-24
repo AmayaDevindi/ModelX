@@ -1,24 +1,24 @@
 symbol,sector,auditor,is_big4_auditor,director_count,independent_director_count,independent_ratio,last_price,p12_high,p12_low,position_in_52wk_range
-AEL.N0000,Capital Goods,"KPMG Ford, Rhodes, Thornton & Co. (Chartered Accountants) No.32 A, Sir Mohamed Macan Markar Mawatha, Colombo 03. Tel: +94 11 5426426, Fax: +94 11 2445872.",True,7,3,0.429,83.3,89.4,63.5,0.764
-ACL.N0000,Capital Goods,M/s Pricewaterhouse Coopers,False,6,2,0.333,97.8,260.25,81.1,0.093
-CFIN.N0000,Diversified Financials,"M/s KPMG, Chartered Accountants of 32 A, Sri Mohamed Macan Marker Mawatha, Colombo 03",True,7,6,0.857,219.75,310.0,190.25,0.246
-CIC.N0000,Materials,"Messrs. KPMG Ford, Rhodes, Thornton & Company",True,6,6,1.0,27.9,38.8,24.5,0.238
-CIC.X0000,Materials,"Messrs. KPMG Ford, Rhodes, Thornton & Company",True,6,6,1.0,23.9,30.9,21.2,0.278
-COMB.N0000,Banks,Messrs KPMG,True,9,9,1.0,214.0,235.25,170.0,0.674
-COMB.X0000,Banks,Messrs KPMG,True,9,9,1.0,188.0,210.0,176.0,0.353
-DFCC.N0000,Banks,"Messrs. Ernst & Young, Chartered Accountants",True,9,7,0.778,131.0,164.25,114.5,0.332
-DIAL.N0000,Telecommunication Services,Deloitte Partners,True,7,7,1.0,48.0,50.5,26.9,0.894
-HNB.N0000,Banks ,M/s Ernst & Young,True,9,9,1.0,393.75,460.0,366.75,0.29
-HNB.X0000,Banks ,M/s Ernst & Young,True,9,9,1.0,341.75,404.0,302.0,0.39
-HAYL.N0000,Capital Goods,Messrs Ernst & Young ,True,11,4,0.364,230.25,260.0,178.0,0.637
-HHL.N0000,Capital Goods,Ernst & Young,True,6,5,0.833,32.0,36.7,27.6,0.484
-JKH.N0000,Capital Goods,"Messrs. Ernst & Young,",True,6,6,1.0,18.7,23.4,17.5,0.203
-LIOC.N0000,Energy,BDO Partners - Sri Lanka,False,4,2,0.5,125.25,158.0,121.5,0.103
-LOLC.N0000,Diversified Financials,Deloitte Partners,True,5,2,0.4,406.0,640.0,370.0,0.133
-MELS.N0000,Food Beverage & Tobacco,"Messrs. KPMG, 32A, Sir Mohamed Macan Marker Mawatha, Colombo 03.",True,9,8,0.889,192.0,194.75,158.5,0.924
-NDB.N0000,Banks ,"Messrs KPMG, Chartered accountants",True,7,6,0.857,111.25,159.0,100.5,0.184
+AEL.N0000,Capital Goods,"KPMG Ford, Rhodes, Thornton & Co. (Chartered Accountants) No.32 A, Sir Mohamed Macan Markar Mawatha, Colombo 03. Tel: +94 11 5426426, Fax: +94 11 2445872.",True,7,3,0.429,82.0,89.4,63.5,0.714
+ACL.N0000,Capital Goods,M/s Pricewaterhouse Coopers,False,6,2,0.333,97.0,260.25,81.1,0.089
+CFIN.N0000,Diversified Financials,"M/s KPMG, Chartered Accountants of 32 A, Sri Mohamed Macan Marker Mawatha, Colombo 03",True,7,6,0.857,216.25,310.0,190.25,0.217
+CIC.N0000,Materials,"Messrs. KPMG Ford, Rhodes, Thornton & Company",True,6,6,1.0,27.7,38.8,24.5,0.224
+CIC.X0000,Materials,"Messrs. KPMG Ford, Rhodes, Thornton & Company",True,6,6,1.0,23.5,30.9,21.2,0.237
+COMB.N0000,Banks,Messrs KPMG,True,9,9,1.0,213.5,235.25,170.0,0.667
+COMB.X0000,Banks,Messrs KPMG,True,9,9,1.0,187.5,210.0,176.0,0.338
+DFCC.N0000,Banks,"Messrs. Ernst & Young, Chartered Accountants",True,9,7,0.778,133.75,164.0,114.5,0.389
+DIAL.N0000,Telecommunication Services,Deloitte Partners,True,7,7,1.0,47.5,50.5,26.9,0.873
+HNB.N0000,Banks ,M/s Ernst & Young,True,9,9,1.0,394.5,460.0,366.75,0.298
+HNB.X0000,Banks ,M/s Ernst & Young,True,9,9,1.0,341.25,404.0,302.0,0.385
+HAYL.N0000,Capital Goods,Messrs Ernst & Young ,True,11,4,0.364,228.0,260.0,178.0,0.61
+HHL.N0000,Capital Goods,Ernst & Young,True,6,5,0.833,31.8,36.7,27.6,0.462
+JKH.N0000,Capital Goods,"Messrs. Ernst & Young,",True,6,6,1.0,18.4,23.4,17.5,0.153
+LIOC.N0000,Energy,BDO Partners - Sri Lanka,False,4,2,0.5,124.5,158.0,121.5,0.082
+LOLC.N0000,Diversified Financials,Deloitte Partners,True,5,2,0.4,402.0,640.0,370.0,0.119
+MELS.N0000,Food Beverage & Tobacco,"Messrs. KPMG, 32A, Sir Mohamed Macan Marker Mawatha, Colombo 03.",True,9,8,0.889,193.0,194.75,158.5,0.952
+NDB.N0000,Banks ,"Messrs KPMG, Chartered accountants",True,7,6,0.857,111.5,159.0,100.5,0.188
 NTB.N0000,Banks ,"Messrs KPMG, Chartered Accountants",True,10,6,0.6,310.0,356.0,265.0,0.495
 SAMP.N0000,Banks ,"Messrs.KPMG, Chartered Accountants",True,9,8,0.889,148.25,167.0,135.0,0.414
-SINS.N0000,Retailing,"Messrs. KPMG Ford, Rhodes, Thornton & Company",True,10,5,0.5,74.1,101.0,61.5,0.319
-SUN.N0000,"Food, Beverage & Tobacco","Messrs. KPMG Ford, Rhodes, Thornton and Company",True,7,6,0.857,30.1,37.4,26.2,0.348
-VONE.N0000,Utilities,Ernst and Young,False,8,6,0.75,91.3,115.0,83.0,0.259
+SINS.N0000,Retailing,"Messrs. KPMG Ford, Rhodes, Thornton & Company",True,10,5,0.5,74.9,101.0,61.5,0.339
+SUN.N0000,"Food, Beverage & Tobacco","Messrs. KPMG Ford, Rhodes, Thornton and Company",True,7,6,0.857,29.9,37.4,26.2,0.33
+VONE.N0000,Utilities,Ernst and Young,False,8,6,0.75,90.5,115.0,83.0,0.234
